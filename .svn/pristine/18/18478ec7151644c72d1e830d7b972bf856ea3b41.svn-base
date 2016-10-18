@@ -1,0 +1,36 @@
+// Generated code from Butter Knife. Do not modify!
+package com.hxkj.cst.cheshuotong.activity;
+
+import android.view.View;
+import butterknife.ButterKnife.Finder;
+import butterknife.ButterKnife.ViewBinder;
+
+public class PayTaxesSix$$ViewBinder<T extends com.hxkj.cst.cheshuotong.activity.PayTaxesSix> implements ViewBinder<T> {
+  @Override public void bind(final Finder finder, final T target, Object source) {
+    View view;
+    view = finder.findRequiredView(source, 2131624073, "field 'mIvBack'");
+    target.mIvBack = finder.castView(view, 2131624073, "field 'mIvBack'");
+    view = finder.findRequiredView(source, 2131624231, "field 'mEtLocation'");
+    target.mEtLocation = finder.castView(view, 2131624231, "field 'mEtLocation'");
+    view = finder.findRequiredView(source, 2131624215, "field 'mTvIdcard'");
+    target.mTvIdcard = finder.castView(view, 2131624215, "field 'mTvIdcard'");
+    view = finder.findRequiredView(source, 2131624216, "field 'mTvAddress'");
+    target.mTvAddress = finder.castView(view, 2131624216, "field 'mTvAddress'");
+    view = finder.findRequiredView(source, 2131624217, "field 'mTvTel'");
+    target.mTvTel = finder.castView(view, 2131624217, "field 'mTvTel'");
+    view = finder.findRequiredView(source, 2131624229, "field 'mBtAppointment'");
+    target.mBtAppointment = finder.castView(view, 2131624229, "field 'mBtAppointment'");
+    view = finder.findRequiredView(source, 2131624230, "field 'mBtPayTaxes'");
+    target.mBtPayTaxes = finder.castView(view, 2131624230, "field 'mBtPayTaxes'");
+  }
+
+  @Override public void unbind(T target) {
+    target.mIvBack = null;
+    target.mEtLocation = null;
+    target.mTvIdcard = null;
+    target.mTvAddress = null;
+    target.mTvTel = null;
+    target.mBtAppointment = null;
+    target.mBtPayTaxes = null;
+  }
+}

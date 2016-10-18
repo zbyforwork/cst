@@ -1,0 +1,18 @@
+// Generated code from Butter Knife. Do not modify!
+package com.hxkj.cst.cheshuotong.fragement;
+
+import android.view.View;
+import butterknife.ButterKnife.Finder;
+import butterknife.ButterKnife.ViewBinder;
+
+public class PayTaxesFragment$$ViewBinder<T extends com.hxkj.cst.cheshuotong.fragement.PayTaxesFragment> implements ViewBinder<T> {
+  @Override public void bind(final Finder finder, final T target, Object source) {
+    View view;
+    view = finder.findRequiredView(source, 2131624301, "field 'recycleviewOrder'");
+    target.recycleviewOrder = finder.castView(view, 2131624301, "field 'recycleviewOrder'");
+  }
+
+  @Override public void unbind(T target) {
+    target.recycleviewOrder = null;
+  }
+}

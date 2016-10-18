@@ -1,0 +1,245 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="#f9f9f9"
+              android:orientation="vertical"
+              tools:context="com.hxkj.cst.cheshuotong.activity.AddCarActivity">
+
+    <RelativeLayout
+        android:id="@+id/re_top"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/title_background_size"
+        android:background="@color/appColor"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        >
+
+        <ImageView
+            android:id="@+id/iv_back"
+            android:layout_width="@dimen/title_image_width_25"
+            android:layout_height="@dimen/title_image_height_25"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:src="@drawable/back"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerInParent="true"
+            android:text="缴税"
+            android:textColor="@color/bg_White"
+            android:textSize="@dimen/title_font_size"
+            />
+
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginTop="5dp"
+        android:background="@color/bg_White"
+        android:orientation="horizontal"
+        >
+
+        <TextView
+            android:id="@+id/label_name"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="16dp"
+            android:gravity="right"
+            android:text="姓名"
+            android:textColor="@color/black"
+            />
+
+        <EditText
+            android:id="@+id/et_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="5dp"
+            android:layout_toRightOf="@+id/label_name"
+            android:background="@null"
+            android:selectAllOnFocus="true"
+            android:hint="请输入姓名"
+            android:textColor="@color/font_grey_color"
+            android:textColorHint="@color/font_grey_color"
+            />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginTop="5dp"
+        android:background="@color/bg_White"
+        android:orientation="horizontal"
+        >
+
+        <TextView
+            android:id="@+id/label_idcard"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="16dp"
+            android:gravity="right"
+            android:text="身份证"
+            android:textColor="@color/black"
+            />
+
+        <EditText
+            android:id="@+id/tv_idcard"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="5dp"
+            android:layout_toRightOf="@+id/label_idcard"
+            android:background="@null"
+            android:selectAllOnFocus="true"
+            android:hint="请输入身份证"
+            android:textColor="@color/font_grey_color"
+            android:textColorHint="@color/font_grey_color"
+            />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginTop="5dp"
+        android:background="@color/bg_White"
+        android:orientation="horizontal"
+        >
+
+        <TextView
+            android:id="@+id/label_address"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="16dp"
+            android:gravity="right"
+            android:text="地址"
+            android:textColor="@color/black"
+            />
+
+        <EditText
+            android:id="@+id/tv_address"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="5dp"
+            android:layout_toRightOf="@+id/label_address"
+            android:background="@null"
+            android:selectAllOnFocus="true"
+            android:hint="请输入地址"
+            android:textColor="@color/font_grey_color"
+            android:textColorHint="@color/font_grey_color"
+            />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginTop="5dp"
+        android:background="@color/bg_White"
+        android:orientation="horizontal"
+        >
+
+        <TextView
+            android:id="@+id/label_tel"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="16dp"
+            android:gravity="right"
+            android:text="电话"
+            android:textColor="@color/black"
+            />
+
+        <EditText
+            android:id="@+id/tv_tel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="5dp"
+            android:layout_toRightOf="@+id/label_tel"
+            android:background="@null"
+            android:selectAllOnFocus="true"
+            android:hint="请输入电话"
+            android:textColor="@color/font_grey_color"
+            android:textColorHint="@color/font_grey_color"
+            />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginTop="5dp"
+        android:background="@color/bg_White"
+        android:orientation="horizontal"
+        >
+
+        <TextView
+            android:id="@+id/label_postcode"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="16dp"
+            android:gravity="right"
+            android:text="邮政编码"
+            android:textColor="@color/black"
+            />
+
+        <EditText
+            android:id="@+id/tv_postcode"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="5dp"
+            android:layout_toRightOf="@+id/label_postcode"
+            android:background="@null"
+            android:selectAllOnFocus="true"
+            android:hint="请输入邮编"
+            android:textColor="@color/font_grey_color"
+            android:textColorHint="@color/font_grey_color"
+            />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"
+        android:layout_marginTop="35dp"
+        android:orientation="horizontal"
+        >
+
+        <Button
+            android:id="@+id/bt_forward"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_weight="1"
+            android:background="@drawable/pay_taxes_forward_bg"
+            android:text="上一步"
+            android:textColor="@color/appColor"
+            android:textSize="@dimen/normal_font_size"/>
+
+        <Button
+            android:id="@+id/bt_next"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_marginLeft="20dp"
+            android:layout_weight="1"
+            android:background="@drawable/pay_taxes_next_bg"
+            android:onClick="next"
+            android:text="下一步"
+            android:textColor="@color/bg_White"
+            android:textSize="@dimen/normal_font_size"/>
+
+    </LinearLayout>
+</LinearLayout>
+
+
+
+<!-- From: file:/D:/cst/app/src/main/res/layout/activity_pay_taxes_one.xml -->

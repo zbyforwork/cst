@@ -1,0 +1,30 @@
+// Generated code from Butter Knife. Do not modify!
+package com.hxkj.cst.cheshuotong.activity;
+
+import android.view.View;
+import butterknife.ButterKnife.Finder;
+import butterknife.ButterKnife.ViewBinder;
+
+public class FeedBackActivity$$ViewBinder<T extends com.hxkj.cst.cheshuotong.activity.FeedBackActivity> implements ViewBinder<T> {
+  @Override public void bind(final Finder finder, final T target, Object source) {
+    View view;
+    view = finder.findRequiredView(source, 2131624073, "field 'ivBack'");
+    target.ivBack = finder.castView(view, 2131624073, "field 'ivBack'");
+    view = finder.findRequiredView(source, 2131624169, "field 'etNumber'");
+    target.etNumber = finder.castView(view, 2131624169, "field 'etNumber'");
+    view = finder.findRequiredView(source, 2131624172, "field 'etContent'");
+    target.etContent = finder.castView(view, 2131624172, "field 'etContent'");
+    view = finder.findRequiredView(source, 2131624170, "field 'scContent'");
+    target.scContent = finder.castView(view, 2131624170, "field 'scContent'");
+    view = finder.findRequiredView(source, 2131624174, "field 'btSubmit'");
+    target.btSubmit = finder.castView(view, 2131624174, "field 'btSubmit'");
+  }
+
+  @Override public void unbind(T target) {
+    target.ivBack = null;
+    target.etNumber = null;
+    target.etContent = null;
+    target.scContent = null;
+    target.btSubmit = null;
+  }
+}

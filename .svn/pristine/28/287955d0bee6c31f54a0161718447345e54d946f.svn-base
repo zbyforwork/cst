@@ -1,0 +1,17 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    tools:context="com.hxkj.cst.cheshuotong.WelcomActivtiy">
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/convenientBanner"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+
+
+
+
+</RelativeLayout>
+<!-- From: file:/D:/WORK/cst/app/src/main/res/layout/activity_welcom_activtiy.xml -->

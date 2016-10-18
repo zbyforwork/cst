@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        jar="D:\project\cst\app\build\intermediates\exploded-aar\com.facebook.fresco\fresco\0.7.0\jars\classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="c4334f20001e3ceaa00b203290961224aca8744f">
+        <dex dex="D:\project\cst\app\build\intermediates\pre-dexed\debug\classes-0d54687c29a4b4659db3048f54e370f384fee5d7.jar" />
+    </item>
+    <item
+        jar="D:\asInstallation_Location\gradle\gradle-2.4\caches\modules-2\files-2.1\com.mcxiaoke.volley\library\1.0.19\a8f23f65fc1e522ee4a1a697ee569901a46741fa\library-1.0.19.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="a8f23f65fc1e522ee4a1a697ee569901a46741fa">
+        <dex dex="D:\project\cst\app\build\intermediates\pre-dexed\debug\library-1.0.19-c41477a9796215da940a4d7834911e091d0d2042.jar" />
+    </item>
+    <item
+        jar="D:\project\cst\app\build\intermediates\exploded-aar\com.android.support\support-v4\22.2.1\jars\libs\internal_impl-22.2.1.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="c471eaaba13ff64f6e0383d1c30a9cdc9a97efeb">
+        <dex dex="D:\project\cst\app\build\intermediates\pre-dexed\debug\internal_impl-22.2.1-852a1460dc43cf6f30609ef919548b4d9683f6d6.jar" />
+    </item>
+    <item
+        jar="D:\project\cst\app\build\intermediates\exploded-aar\com.android.support\design\22.2.0\jars\classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="fc63b820d54c8a27a3a614bdd93920e0076581c2">
+        <dex dex="D:\project\cst\app\build\intermediates\pre-dexed\debug\classes-fd416fe0f52af27b8d66335651a5cacfec3defab.jar" />
+    </item>
+    <item
+        jar="D:\project\cst\app\build\intermediates\exploded-aar\com.facebook.fresco\drawee\0.7.0\jars\classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="956a7969705640c8790b983aaa7ff805dff80cf6">
+        <dex dex="D:\project\cst\app\build\intermediates\pre-dexed\debug\classes-e0273a90d865a0260957e40e956f9161d14eec92.jar" />
+    </item>
+    <item
+        jar="D:\project\cst\app\build\intermediates\exploded-aar\com.facebook.fresco\fbcore\0.7.0\jars\classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="7eb126039737b3ada03141cba019d2c385cceca8">
+        <dex dex="D:\project\cst\app\build\intermediates\pre-dexed\debug\classes-3cf3eb97c74b778b5fc4af6bf8d85979e6364a6c.jar" />
+    </item>
+    <item
+        jar="D:\project\cst\app\build\intermediates\exploded-aar\com.facebook.fresco\imagepipeline\0.7.0\jars\classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="a31fd4d68ac17ad1988f4b44eed1f69327315a55">
+        <dex dex="D:\project\cst\app\build\intermediates\pre-dexed\debug\classes-cf004abbf4070976decd8262c9c5b5fd59954770.jar" />
+    </item>
+    <item
+        jar="D:\sdk\extras\android\m2repository\com\android\support\support-annotations\22.2.1\support-annotations-22.2.1.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="61a0ff5c29295ec56d7e0bd3d25d95dbf71b4b2b">
+        <dex dex="D:\project\cst\app\build\intermediates\pre-dexed\debug\support-annotations-22.2.1-0bb0540704196004630adfc9c9016d3bfb057bf3.jar" />
+    </item>
+    <item
+        jar="D:\project\cst\app\build\intermediates\exploded-aar\com.android.support\support-v4\22.2.1\jars\classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="f8efd0096475e0daf054267b61544e10dc776503">
+        <dex dex="D:\project\cst\app\build\intermediates\pre-dexed\debug\classes-2201033d4ea98b1eb208d2cf8f0d09bcb66598da.jar" />
+    </item>
+    <item
+        jar="D:\asInstallation_Location\gradle\gradle-2.4\caches\modules-2\files-2.1\com.parse.bolts\bolts-android\1.1.4\129874135e6081269ace2312092031558865de12\bolts-android-1.1.4.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="129874135e6081269ace2312092031558865de12">
+        <dex dex="D:\project\cst\app\build\intermediates\pre-dexed\debug\bolts-android-1.1.4-d29771e64126d0f296195483f5a652d136636d5e.jar" />
+    </item>
+    <item
+        jar="D:\asInstallation_Location\gradle\gradle-2.4\caches\modules-2\files-2.1\com.jakewharton\butterknife\7.0.1\d5d13ea991eab0252e3710e5df3d6a9d4b21d461\butterknife-7.0.1.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="d5d13ea991eab0252e3710e5df3d6a9d4b21d461">
+        <dex dex="D:\project\cst\app\build\intermediates\pre-dexed\debug\butterknife-7.0.1-5e032b7c665b27f29e72412ef019b4eb8b373268.jar" />
+    </item>
+    <item
+        jar="D:\project\cst\app\build\intermediates\exploded-aar\com.leaking.slideswitch\app\1.0.0\jars\classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="39857b7c44257a9712cc4397e87ead117395d230">
+        <dex dex="D:\project\cst\app\build\intermediates\pre-dexed\debug\classes-1432130f61d006cac6aecde66f30924111e5474b.jar" />
+    </item>
+    <item
+        jar="D:\asInstallation_Location\gradle\gradle-2.4\caches\modules-2\files-2.1\com.nineoldandroids\library\2.4.0\e9b63380f3a242dbdbf103a2355ad7e43bad17cb\library-2.4.0.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="e9b63380f3a242dbdbf103a2355ad7e43bad17cb">
+        <dex dex="D:\project\cst\app\build\intermediates\pre-dexed\debug\library-2.4.0-4785f14b84666bfae4f7ab636834ccee927c5d07.jar" />
+    </item>
+    <item
+        jar="D:\asInstallation_Location\gradle\gradle-2.4\caches\modules-2\files-2.1\com.github.bumptech.glide\glide\3.6.0\a7537446a030da8eb0da4c71424d16c2589f6c4a\glide-3.6.0.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="a7537446a030da8eb0da4c71424d16c2589f6c4a">
+        <dex dex="D:\project\cst\app\build\intermediates\pre-dexed\debug\glide-3.6.0-449cb3a54cef7972ef5b70d1e84f2de2e581fcf2.jar" />
+    </item>
+    <item
+        jar="D:\project\cst\app\build\intermediates\exploded-aar\com.android.support\recyclerview-v7\22.2.0\jars\classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="5b37cf49773f7f17aca9830efd3053b0cac56728">
+        <dex dex="D:\project\cst\app\build\intermediates\pre-dexed\debug\classes-41d212d9f07583fe4385559899fae1470e8fba67.jar" />
+    </item>
+    <item
+        jar="D:\project\cst\app\build\intermediates\exploded-aar\com.marshalchen.ultimaterecyclerview\library\0.3.12\jars\classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="b0b8f9b5612609458e6fd9a313994a93cd50b691">
+        <dex dex="D:\project\cst\app\build\intermediates\pre-dexed\debug\classes-e1dbff22a4d6378e7c0569ec8b28d9852142169b.jar" />
+    </item>
+    <item
+        jar="D:\project\cst\app\build\intermediates\exploded-aar\com.bigkoo\convenientbanner\1.0.8\jars\classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="87dc383440adec04ed9223bb2e6dc33b3f1a2913">
+        <dex dex="D:\project\cst\app\build\intermediates\pre-dexed\debug\classes-59b2af488c5ae48d65d7e78549f078a81b575ae6.jar" />
+    </item>
+    <item
+        jar="D:\project\cst\app\build\intermediates\exploded-aar\in.srain.cube\ultra-ptr\1.0.10\jars\classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="f7aa9a64408679b54260b859ae8eb723b69ecd30">
+        <dex dex="D:\project\cst\app\build\intermediates\pre-dexed\debug\classes-68a4d5c610cd7c7499b5f602e8d52676af70d8b2.jar" />
+    </item>
+    <item
+        jar="D:\project\cst\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\jars\classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="4486e953d1f35f8ccab098b1dd67146366d5f731">
+        <dex dex="D:\project\cst\app\build\intermediates\pre-dexed\debug\classes-c9a6ad445adefb9d2b9bc3d415dbe70582edcd42.jar" />
+    </item>
+
+</items>

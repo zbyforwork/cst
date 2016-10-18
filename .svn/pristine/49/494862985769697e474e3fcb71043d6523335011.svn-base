@@ -1,0 +1,48 @@
+// Generated code from Butter Knife. Do not modify!
+package com.hxkj.cst.cheshuotong;
+
+import android.view.View;
+import butterknife.ButterKnife.Finder;
+import butterknife.ButterKnife.ViewBinder;
+
+public class MainActivity$$ViewBinder<T extends com.hxkj.cst.cheshuotong.MainActivity> implements ViewBinder<T> {
+  @Override public void bind(final Finder finder, final T target, Object source) {
+    View view;
+    view = finder.findRequiredView(source, 2131624181, "field 'mMainTabLayout'");
+    target.mMainTabLayout = finder.castView(view, 2131624181, "field 'mMainTabLayout'");
+    view = finder.findRequiredView(source, 2131624182, "field 'mMainLayout'");
+    target.mMainLayout = finder.castView(view, 2131624182, "field 'mMainLayout'");
+    view = finder.findRequiredView(source, 2131624178, "field 'mIvMenu'");
+    target.mIvMenu = finder.castView(view, 2131624178, "field 'mIvMenu'");
+    view = finder.findRequiredView(source, 2131624180, "field 'mIvLogin'");
+    target.mIvLogin = finder.castView(view, 2131624180, "field 'mIvLogin'");
+    view = finder.findRequiredView(source, 2131624177, "field 'mDrawerLayout'");
+    target.mDrawerLayout = finder.castView(view, 2131624177, "field 'mDrawerLayout'");
+    view = finder.findRequiredView(source, 2131624179, "field 'mTvTitle'");
+    target.mTvTitle = finder.castView(view, 2131624179, "field 'mTvTitle'");
+    view = finder.findRequiredView(source, 2131624183, "field 'user'");
+    target.user = finder.castView(view, 2131624183, "field 'user'");
+    view = finder.findRequiredView(source, 2131624185, "field 'llCarManage'");
+    target.llCarManage = finder.castView(view, 2131624185, "field 'llCarManage'");
+    view = finder.findRequiredView(source, 2131624186, "field 'llNewsCenter'");
+    target.llNewsCenter = finder.castView(view, 2131624186, "field 'llNewsCenter'");
+    view = finder.findRequiredView(source, 2131624187, "field 'llBreakLawsRecords'");
+    target.llBreakLawsRecords = finder.castView(view, 2131624187, "field 'llBreakLawsRecords'");
+    view = finder.findRequiredView(source, 2131624188, "field 'llSettingCenter'");
+    target.llSettingCenter = finder.castView(view, 2131624188, "field 'llSettingCenter'");
+  }
+
+  @Override public void unbind(T target) {
+    target.mMainTabLayout = null;
+    target.mMainLayout = null;
+    target.mIvMenu = null;
+    target.mIvLogin = null;
+    target.mDrawerLayout = null;
+    target.mTvTitle = null;
+    target.user = null;
+    target.llCarManage = null;
+    target.llNewsCenter = null;
+    target.llBreakLawsRecords = null;
+    target.llSettingCenter = null;
+  }
+}

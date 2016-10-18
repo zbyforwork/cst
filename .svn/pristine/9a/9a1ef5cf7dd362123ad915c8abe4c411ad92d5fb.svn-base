@@ -1,0 +1,48 @@
+// Generated code from Butter Knife. Do not modify!
+package com.hxkj.cst.cheshuotong.activity;
+
+import android.view.View;
+import butterknife.ButterKnife.Finder;
+import butterknife.ButterKnife.ViewBinder;
+
+public class PhoneGetPasswordActivity$$ViewBinder<T extends com.hxkj.cst.cheshuotong.activity.PhoneGetPasswordActivity> implements ViewBinder<T> {
+  @Override public void bind(final Finder finder, final T target, Object source) {
+    View view;
+    view = finder.findRequiredView(source, 2131624073, "field 'ivBack'");
+    target.ivBack = finder.castView(view, 2131624073, "field 'ivBack'");
+    view = finder.findRequiredView(source, 2131624078, "field 'tvPhoneNumber'");
+    target.tvPhoneNumber = finder.castView(view, 2131624078, "field 'tvPhoneNumber'");
+    view = finder.findRequiredView(source, 2131624079, "field 'etNumber'");
+    target.etNumber = finder.castView(view, 2131624079, "field 'etNumber'");
+    view = finder.findRequiredView(source, 2131624077, "field 'relPhone'");
+    target.relPhone = finder.castView(view, 2131624077, "field 'relPhone'");
+    view = finder.findRequiredView(source, 2131624090, "field 'tvYanzhengma'");
+    target.tvYanzhengma = finder.castView(view, 2131624090, "field 'tvYanzhengma'");
+    view = finder.findRequiredView(source, 2131624091, "field 'etYanzhengmaEdit'");
+    target.etYanzhengmaEdit = finder.castView(view, 2131624091, "field 'etYanzhengmaEdit'");
+    view = finder.findRequiredView(source, 2131624092, "field 'btGetcode'");
+    target.btGetcode = finder.castView(view, 2131624092, "field 'btGetcode'");
+    view = finder.findRequiredView(source, 2131624089, "field 'relYanzhengma'");
+    target.relYanzhengma = finder.castView(view, 2131624089, "field 'relYanzhengma'");
+    view = finder.findRequiredView(source, 2131624076, "field 'relative'");
+    target.relative = finder.castView(view, 2131624076, "field 'relative'");
+    view = finder.findRequiredView(source, 2131624074, "field 'relativeLayout'");
+    target.relativeLayout = finder.castView(view, 2131624074, "field 'relativeLayout'");
+    view = finder.findRequiredView(source, 2131624199, "field 'btNext'");
+    target.btNext = finder.castView(view, 2131624199, "field 'btNext'");
+  }
+
+  @Override public void unbind(T target) {
+    target.ivBack = null;
+    target.tvPhoneNumber = null;
+    target.etNumber = null;
+    target.relPhone = null;
+    target.tvYanzhengma = null;
+    target.etYanzhengmaEdit = null;
+    target.btGetcode = null;
+    target.relYanzhengma = null;
+    target.relative = null;
+    target.relativeLayout = null;
+    target.btNext = null;
+  }
+}

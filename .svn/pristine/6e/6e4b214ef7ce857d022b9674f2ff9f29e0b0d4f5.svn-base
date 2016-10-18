@@ -1,0 +1,55 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.hxkj.cst.cheshuotong.activity.ArchivesActivity">
+
+    <RelativeLayout
+        android:id="@+id/re_top"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/title_background_size"
+        android:layout_marginBottom="5dp"
+        android:background="@color/appColor"
+        >
+
+        <ImageView
+            android:id="@+id/iv_back"
+            android:layout_width="@dimen/title_image_width_25"
+            android:layout_height="@dimen/title_image_height_25"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:src="@drawable/back"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerInParent="true"
+            android:text="档案"
+            android:textColor="@color/bg_White"
+            android:textSize="@dimen/title_font_size"
+            />
+
+    <!--    <Button
+            android:id="@+id/addarch"
+            android:layout_width="70dp"
+            android:layout_height="30dp"
+            android:text="添加档案"
+            android:layout_marginRight="10dp"
+            android:textColor="@color/white"
+            android:background="@color/appColor"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            />-->
+
+
+    </RelativeLayout>
+
+    <com.marshalchen.ultimaterecyclerview.UltimateRecyclerView
+        android:id="@+id/recycleview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+    </com.marshalchen.ultimaterecyclerview.UltimateRecyclerView>
+
+</LinearLayout>

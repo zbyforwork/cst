@@ -1,0 +1,21 @@
+// Generated code from Butter Knife. Do not modify!
+package com.hxkj.cst.cheshuotong.activity;
+
+import android.view.View;
+import butterknife.ButterKnife.Finder;
+import butterknife.ButterKnife.ViewBinder;
+
+public class WayOfGetpasswordActivity$$ViewBinder<T extends com.hxkj.cst.cheshuotong.activity.WayOfGetpasswordActivity> implements ViewBinder<T> {
+  @Override public void bind(final Finder finder, final T target, Object source) {
+    View view;
+    view = finder.findRequiredView(source, 2131624073, "field 'ivBack'");
+    target.ivBack = finder.castView(view, 2131624073, "field 'ivBack'");
+    view = finder.findRequiredView(source, 2131624264, "field 'relByphone'");
+    target.relByphone = finder.castView(view, 2131624264, "field 'relByphone'");
+  }
+
+  @Override public void unbind(T target) {
+    target.ivBack = null;
+    target.relByphone = null;
+  }
+}

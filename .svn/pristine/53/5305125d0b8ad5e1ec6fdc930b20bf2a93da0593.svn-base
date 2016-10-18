@@ -1,0 +1,180 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                tools:context="com.hxkj.cst.cheshuotong.activity.MaillGetPasswordActivity">
+
+    <RelativeLayout
+        android:id="@+id/re_top"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/title_background_size"
+        android:layout_marginBottom="5dp"
+        android:background="@color/appColor"
+        >
+
+        <ImageView
+            android:id="@+id/iv_Mailback"
+            android:layout_width="@dimen/title_image_width_25"
+            android:layout_height="@dimen/title_image_height_25"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:src="@drawable/back"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerInParent="true"
+            android:text="邮箱找回密码"
+            android:textColor="@color/bg_White"
+            android:textSize="@dimen/title_font_size"
+            />
+
+
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/re_top"
+        android:layout_marginTop="20dp">
+
+        <View
+            android:id="@+id/view1"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/thin_divider"
+            android:background="#E0E0E0"/>
+
+        <RelativeLayout
+            android:id="@+id/relative"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:layout_below="@+id/view1"
+            android:background="#F7F7F7">
+
+
+            <RelativeLayout
+                android:id="@+id/rel_mail"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:background="@color/bg_White">
+
+
+                <TextView
+                    android:id="@+id/tv_mail"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginTop="10dp"
+                    android:text="邮箱号"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/normal_font_size"/>
+
+                <EditText
+                    android:id="@+id/et_mail"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="100dp"
+                    android:hint=" 捆绑的邮箱号"
+                    android:singleLine="true"
+                    android:background="@null"
+                    android:inputType="textEmailAddress"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/normal_font_size"/>
+
+                <View
+                    android:id="@+id/view3"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/thin_divider"
+                    android:layout_alignParentBottom="true"
+                    android:background="#E0E0E0"/>
+            </RelativeLayout>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rel_yanzhengma"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_below="@+id/relative"
+            android:background="@color/bg_White">
+
+
+            <TextView
+                android:id="@+id/tv_yanzhengma"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="5dp"
+                android:background="@null"
+                android:singleLine="true"
+                android:text="验证码"
+                android:textColor="@color/black"
+                android:textSize="@dimen/normal_font_size"/>
+
+            <EditText
+                android:id="@+id/et_yanzhengma"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="100dp"
+                android:hint="请输入验证码"
+                android:singleLine="true"
+                android:background="@null"
+                android:inputType="textAutoComplete"
+                android:textColor="@color/black"
+                android:textSize="@dimen/normal_font_size"/>
+
+            <Button
+                android:id="@+id/bt_getcode"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginBottom="5dp"
+                android:layout_marginRight="12dp"
+                android:layout_marginTop="5dp"
+                android:background="@color/dialog"
+                android:text="获 取"
+                android:textColor="@color/white"
+                android:textSize="@dimen/small_font_size"/>
+
+            <View
+                android:id="@+id/view4"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/thin_divider"
+                android:layout_alignParentBottom="true"
+                android:background="#E0E0E0"/>
+        </RelativeLayout>
+
+
+
+    </RelativeLayout>
+
+    <Button
+        android:id="@+id/bt_login"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_below="@+id/relativeLayout"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:layout_marginTop="35dp"
+        android:background="@drawable/buttonblue"
+        android:text="下一步"
+        android:textColor="@color/bg_White"
+        android:textSize="@dimen/normal_font_size"/>
+
+
+
+</RelativeLayout>
+<!-- From: file:/D:/cst/app/src/main/res/layout/activity_maill_getpassword.xml -->

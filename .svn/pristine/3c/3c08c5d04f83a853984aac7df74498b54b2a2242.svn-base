@@ -1,0 +1,66 @@
+// Generated code from Butter Knife. Do not modify!
+package com.hxkj.cst.cheshuotong.activity;
+
+import android.view.View;
+import butterknife.ButterKnife.Finder;
+import butterknife.ButterKnife.ViewBinder;
+
+public class AccountRegisterActivity$$ViewBinder<T extends com.hxkj.cst.cheshuotong.activity.AccountRegisterActivity> implements ViewBinder<T> {
+  @Override public void bind(final Finder finder, final T target, Object source) {
+    View view;
+    view = finder.findRequiredView(source, 2131624073, "field 'ivBack'");
+    target.ivBack = finder.castView(view, 2131624073, "field 'ivBack'");
+    view = finder.findRequiredView(source, 2131624078, "field 'tvPhoneNumber'");
+    target.tvPhoneNumber = finder.castView(view, 2131624078, "field 'tvPhoneNumber'");
+    view = finder.findRequiredView(source, 2131624079, "field 'etNumber'");
+    target.etNumber = finder.castView(view, 2131624079, "field 'etNumber'");
+    view = finder.findRequiredView(source, 2131624077, "field 'relPhone'");
+    target.relPhone = finder.castView(view, 2131624077, "field 'relPhone'");
+    view = finder.findRequiredView(source, 2131624082, "field 'tvPassword'");
+    target.tvPassword = finder.castView(view, 2131624082, "field 'tvPassword'");
+    view = finder.findRequiredView(source, 2131624083, "field 'etPassword'");
+    target.etPassword = finder.castView(view, 2131624083, "field 'etPassword'");
+    view = finder.findRequiredView(source, 2131624081, "field 'relPassword'");
+    target.relPassword = finder.castView(view, 2131624081, "field 'relPassword'");
+    view = finder.findRequiredView(source, 2131624090, "field 'tvYanzhengma'");
+    target.tvYanzhengma = finder.castView(view, 2131624090, "field 'tvYanzhengma'");
+    view = finder.findRequiredView(source, 2131624091, "field 'etYanzhengmaEdit'");
+    target.etYanzhengmaEdit = finder.castView(view, 2131624091, "field 'etYanzhengmaEdit'");
+    view = finder.findRequiredView(source, 2131624092, "field 'btGetcode'");
+    target.btGetcode = finder.castView(view, 2131624092, "field 'btGetcode'");
+    view = finder.findRequiredView(source, 2131624089, "field 'relYanzhengma'");
+    target.relYanzhengma = finder.castView(view, 2131624089, "field 'relYanzhengma'");
+    view = finder.findRequiredView(source, 2131624094, "field 'tvMail'");
+    target.tvMail = finder.castView(view, 2131624094, "field 'tvMail'");
+    view = finder.findRequiredView(source, 2131624095, "field 'etMail'");
+    target.etMail = finder.castView(view, 2131624095, "field 'etMail'");
+    view = finder.findRequiredView(source, 2131624096, "field 'view6'");
+    target.view6 = view;
+    view = finder.findRequiredView(source, 2131624093, "field 'relMail'");
+    target.relMail = finder.castView(view, 2131624093, "field 'relMail'");
+    view = finder.findRequiredView(source, 2131624076, "field 'relative'");
+    target.relative = finder.castView(view, 2131624076, "field 'relative'");
+    view = finder.findRequiredView(source, 2131624097, "field 'btRegister'");
+    target.btRegister = finder.castView(view, 2131624097, "field 'btRegister'");
+  }
+
+  @Override public void unbind(T target) {
+    target.ivBack = null;
+    target.tvPhoneNumber = null;
+    target.etNumber = null;
+    target.relPhone = null;
+    target.tvPassword = null;
+    target.etPassword = null;
+    target.relPassword = null;
+    target.tvYanzhengma = null;
+    target.etYanzhengmaEdit = null;
+    target.btGetcode = null;
+    target.relYanzhengma = null;
+    target.tvMail = null;
+    target.etMail = null;
+    target.view6 = null;
+    target.relMail = null;
+    target.relative = null;
+    target.btRegister = null;
+  }
+}

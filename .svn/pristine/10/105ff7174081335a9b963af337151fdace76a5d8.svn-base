@@ -1,0 +1,45 @@
+// Generated code from Butter Knife. Do not modify!
+package com.hxkj.cst.cheshuotong.activity;
+
+import android.view.View;
+import butterknife.ButterKnife.Finder;
+import butterknife.ButterKnife.ViewBinder;
+
+public class CarDetailActivity$$ViewBinder<T extends com.hxkj.cst.cheshuotong.activity.CarDetailActivity> implements ViewBinder<T> {
+  @Override public void bind(final Finder finder, final T target, Object source) {
+    View view;
+    view = finder.findRequiredView(source, 2131624073, "field 'ivBack'");
+    target.ivBack = finder.castView(view, 2131624073, "field 'ivBack'");
+    view = finder.findRequiredView(source, 2131624148, "field 'ivCarImage'");
+    target.ivCarImage = finder.castView(view, 2131624148, "field 'ivCarImage'");
+    view = finder.findRequiredView(source, 2131624150, "field 'tvNationName'");
+    target.tvNationName = finder.castView(view, 2131624150, "field 'tvNationName'");
+    view = finder.findRequiredView(source, 2131624152, "field 'tvBrandName'");
+    target.tvBrandName = finder.castView(view, 2131624152, "field 'tvBrandName'");
+    view = finder.findRequiredView(source, 2131624154, "field 'tvFrameNumber'");
+    target.tvFrameNumber = finder.castView(view, 2131624154, "field 'tvFrameNumber'");
+    view = finder.findRequiredView(source, 2131624156, "field 'tvPlatetype'");
+    target.tvPlatetype = finder.castView(view, 2131624156, "field 'tvPlatetype'");
+    view = finder.findRequiredView(source, 2131624158, "field 'tvPlateNumber'");
+    target.tvPlateNumber = finder.castView(view, 2131624158, "field 'tvPlateNumber'");
+    view = finder.findRequiredView(source, 2131624160, "field 'tvModel'");
+    target.tvModel = finder.castView(view, 2131624160, "field 'tvModel'");
+    view = finder.findRequiredView(source, 2131624162, "field 'tvCreateTime'");
+    target.tvCreateTime = finder.castView(view, 2131624162, "field 'tvCreateTime'");
+    view = finder.findRequiredView(source, 2131624165, "field 'tvAlias'");
+    target.tvAlias = finder.castView(view, 2131624165, "field 'tvAlias'");
+  }
+
+  @Override public void unbind(T target) {
+    target.ivBack = null;
+    target.ivCarImage = null;
+    target.tvNationName = null;
+    target.tvBrandName = null;
+    target.tvFrameNumber = null;
+    target.tvPlatetype = null;
+    target.tvPlateNumber = null;
+    target.tvModel = null;
+    target.tvCreateTime = null;
+    target.tvAlias = null;
+  }
+}

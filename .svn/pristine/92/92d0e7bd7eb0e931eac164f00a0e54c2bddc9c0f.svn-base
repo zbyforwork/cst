@@ -1,0 +1,36 @@
+// Generated code from Butter Knife. Do not modify!
+package com.hxkj.cst.cheshuotong.activity;
+
+import android.view.View;
+import butterknife.ButterKnife.Finder;
+import butterknife.ButterKnife.ViewBinder;
+
+public class SettingActivity$$ViewBinder<T extends com.hxkj.cst.cheshuotong.activity.SettingActivity> implements ViewBinder<T> {
+  @Override public void bind(final Finder finder, final T target, Object source) {
+    View view;
+    view = finder.findRequiredView(source, 2131624073, "field 'ivBack'");
+    target.ivBack = finder.castView(view, 2131624073, "field 'ivBack'");
+    view = finder.findRequiredView(source, 2131624255, "field 'ivPushSettingone'");
+    target.ivPushSettingone = finder.castView(view, 2131624255, "field 'ivPushSettingone'");
+    view = finder.findRequiredView(source, 2131624253, "field 'relPushSettingone'");
+    target.relPushSettingone = finder.castView(view, 2131624253, "field 'relPushSettingone'");
+    view = finder.findRequiredView(source, 2131624258, "field 'ivSuggestionBack'");
+    target.ivSuggestionBack = finder.castView(view, 2131624258, "field 'ivSuggestionBack'");
+    view = finder.findRequiredView(source, 2131624256, "field 'relSuggestionBack'");
+    target.relSuggestionBack = finder.castView(view, 2131624256, "field 'relSuggestionBack'");
+    view = finder.findRequiredView(source, 2131624261, "field 'ivCheckupdate'");
+    target.ivCheckupdate = finder.castView(view, 2131624261, "field 'ivCheckupdate'");
+    view = finder.findRequiredView(source, 2131624259, "field 'relCheckupdate'");
+    target.relCheckupdate = finder.castView(view, 2131624259, "field 'relCheckupdate'");
+  }
+
+  @Override public void unbind(T target) {
+    target.ivBack = null;
+    target.ivPushSettingone = null;
+    target.relPushSettingone = null;
+    target.ivSuggestionBack = null;
+    target.relSuggestionBack = null;
+    target.ivCheckupdate = null;
+    target.relCheckupdate = null;
+  }
+}

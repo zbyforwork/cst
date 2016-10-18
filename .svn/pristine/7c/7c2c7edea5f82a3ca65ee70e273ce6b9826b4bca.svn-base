@@ -1,0 +1,55 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                tools:context="com.hxkj.cst.cheshuotong.activity.BreakRulesRecordInActivity">
+
+    <RelativeLayout
+        android:id="@+id/re_top"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/title_background_size"
+        android:layout_marginBottom="5dp"
+        android:background="@color/appColor"
+        >
+
+        <ImageView
+            android:id="@+id/iv_back"
+            android:layout_width="@dimen/title_image_width_25"
+            android:layout_height="@dimen/title_image_height_25"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:src="@drawable/back"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerInParent="true"
+            android:text="云A5J253"
+            android:textColor="@color/bg_White"
+            android:textSize="@dimen/title_font_size"
+            />
+
+
+    </RelativeLayout>
+
+    <View
+        android:id="@+id/view1"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/thin_divider"
+        android:background="#E0E0E0"
+        android:layout_below="@+id/re_top"
+        android:layout_marginTop="@dimen/abc_action_bar_content_inset_material"
+        />
+
+    <com.marshalchen.ultimaterecyclerview.UltimateRecyclerView
+        android:id="@+id/recycleview"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        >
+    </com.marshalchen.ultimaterecyclerview.UltimateRecyclerView>
+
+</LinearLayout>
+<!-- From: file:/D:/WORK/cst/app/src/main/res/layout/activity_break_rules_record_in.xml -->

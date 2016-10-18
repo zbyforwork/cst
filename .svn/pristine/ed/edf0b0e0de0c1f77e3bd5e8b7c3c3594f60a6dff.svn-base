@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/capture_frame"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" >
+    <RelativeLayout
+        android:id="@+id/re_top"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/title_background_size"
+        android:background="@color/appColor"
+        >
+
+        <ImageView
+            android:id="@+id/iv_back"
+            android:layout_width="@dimen/title_image_width_25"
+            android:layout_height="@dimen/title_image_width_25"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="16dp"
+            android:src="@drawable/back"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true"
+            android:gravity="center"
+            android:text="缴税地点"
+            android:textColor="@color/white"
+            android:textSize="@dimen/title_font_size"/>
+    </RelativeLayout>
+    <FrameLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_below="@+id/re_top">
+    <SurfaceView
+        android:id="@+id/capture_preview_view"
+        android:layout_below="@+id/re_top"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_gravity="center" />
+
+    <cn.hugo.android.scanner.view.ViewfinderView
+        android:id="@+id/capture_viewfinder_view"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_gravity="center"
+        android:background="@android:color/transparent" />
+
+        <TextView
+            android:id="@+id/capture_top_hint"
+            android:layout_width="wrap_content"
+            android:layout_height="85.0dip"
+            android:layout_gravity="top|center"
+            android:layout_weight="3.0"
+            android:gravity="center"
+            android:text="请扫描合格证"
+            android:textColor="@color/appColor"
+            android:textSize="16sp" />
+    </FrameLayout>
+
+</RelativeLayout><!-- From: file:/D:/cst/app/src/main/res/layout/activity_capture_layout.xml -->

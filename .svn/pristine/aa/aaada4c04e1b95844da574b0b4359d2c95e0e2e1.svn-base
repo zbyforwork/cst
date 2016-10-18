@@ -1,0 +1,75 @@
+// Generated code from Butter Knife. Do not modify!
+package com.hxkj.cst.cheshuotong.activity;
+
+import android.view.View;
+import butterknife.ButterKnife.Finder;
+import butterknife.ButterKnife.ViewBinder;
+
+public class AddCarActivity$$ViewBinder<T extends com.hxkj.cst.cheshuotong.activity.AddCarActivity> implements ViewBinder<T> {
+  @Override public void bind(final Finder finder, final T target, Object source) {
+    View view;
+    view = finder.findRequiredView(source, 2131624073, "field 'ivBack'");
+    target.ivBack = finder.castView(view, 2131624073, "field 'ivBack'");
+    view = finder.findRequiredView(source, 2131624109, "field 'tvCar'");
+    target.tvCar = finder.castView(view, 2131624109, "field 'tvCar'");
+    view = finder.findRequiredView(source, 2131624113, "field 'tvCarType'");
+    target.tvCarType = finder.castView(view, 2131624113, "field 'tvCarType'");
+    view = finder.findRequiredView(source, 2131624114, "field 'tvCarType2'");
+    target.tvCarType2 = finder.castView(view, 2131624114, "field 'tvCarType2'");
+    view = finder.findRequiredView(source, 2131624115, "field 'ivCarType1'");
+    target.ivCarType1 = finder.castView(view, 2131624115, "field 'ivCarType1'");
+    view = finder.findRequiredView(source, 2131624125, "field 'tvChejiahao'");
+    target.tvChejiahao = finder.castView(view, 2131624125, "field 'tvChejiahao'");
+    view = finder.findRequiredView(source, 2131624126, "field 'etChejiahao2'");
+    target.etChejiahao2 = finder.castView(view, 2131624126, "field 'etChejiahao2'");
+    view = finder.findRequiredView(source, 2131624127, "field 'mIvQuestion'");
+    target.mIvQuestion = finder.castView(view, 2131624127, "field 'mIvQuestion'");
+    view = finder.findRequiredView(source, 2131624130, "field 'tvRemarks'");
+    target.tvRemarks = finder.castView(view, 2131624130, "field 'tvRemarks'");
+    view = finder.findRequiredView(source, 2131624131, "field 'tvRemarkss2'");
+    target.tvRemarkss2 = finder.castView(view, 2131624131, "field 'tvRemarkss2'");
+    view = finder.findRequiredView(source, 2131624133, "field 'relTips'");
+    target.relTips = finder.castView(view, 2131624133, "field 'relTips'");
+    view = finder.findRequiredView(source, 2131624134, "field 'btSure'");
+    target.btSure = finder.castView(view, 2131624134, "field 'btSure'");
+    view = finder.findRequiredView(source, 2131624107, "field 'mIvJumpToPlaceLocation'");
+    target.mIvJumpToPlaceLocation = finder.castView(view, 2131624107, "field 'mIvJumpToPlaceLocation'");
+    view = finder.findRequiredView(source, 2131624106, "field 'mTvLocation'");
+    target.mTvLocation = finder.castView(view, 2131624106, "field 'mTvLocation'");
+    view = finder.findRequiredView(source, 2131624110, "field 'mLinearlayoutCarTypeSmall'");
+    target.mLinearlayoutCarTypeSmall = finder.castView(view, 2131624110, "field 'mLinearlayoutCarTypeSmall'");
+    view = finder.findRequiredView(source, 2131624111, "field 'mLinearlayoutCarTypeGreat'");
+    target.mLinearlayoutCarTypeGreat = finder.castView(view, 2131624111, "field 'mLinearlayoutCarTypeGreat'");
+    view = finder.findRequiredView(source, 2131624121, "field 'mTvAddCarBelongKey'");
+    target.mTvAddCarBelongKey = finder.castView(view, 2131624121, "field 'mTvAddCarBelongKey'");
+    view = finder.findRequiredView(source, 2131624120, "field 'mLinearlayoutCarLicenseHanzi'");
+    target.mLinearlayoutCarLicenseHanzi = finder.castView(view, 2131624120, "field 'mLinearlayoutCarLicenseHanzi'");
+    view = finder.findRequiredView(source, 2131624122, "field 'mEdittextCarLicenseNumber'");
+    target.mEdittextCarLicenseNumber = finder.castView(view, 2131624122, "field 'mEdittextCarLicenseNumber'");
+    view = finder.findRequiredView(source, 2131624119, "field 'mLinearlayoutCarLicense'");
+    target.mLinearlayoutCarLicense = finder.castView(view, 2131624119, "field 'mLinearlayoutCarLicense'");
+  }
+
+  @Override public void unbind(T target) {
+    target.ivBack = null;
+    target.tvCar = null;
+    target.tvCarType = null;
+    target.tvCarType2 = null;
+    target.ivCarType1 = null;
+    target.tvChejiahao = null;
+    target.etChejiahao2 = null;
+    target.mIvQuestion = null;
+    target.tvRemarks = null;
+    target.tvRemarkss2 = null;
+    target.relTips = null;
+    target.btSure = null;
+    target.mIvJumpToPlaceLocation = null;
+    target.mTvLocation = null;
+    target.mLinearlayoutCarTypeSmall = null;
+    target.mLinearlayoutCarTypeGreat = null;
+    target.mTvAddCarBelongKey = null;
+    target.mLinearlayoutCarLicenseHanzi = null;
+    target.mEdittextCarLicenseNumber = null;
+    target.mLinearlayoutCarLicense = null;
+  }
+}

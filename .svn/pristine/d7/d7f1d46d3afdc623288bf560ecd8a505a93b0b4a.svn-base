@@ -1,0 +1,39 @@
+// Generated code from Butter Knife. Do not modify!
+package com.hxkj.cst.cheshuotong.activity;
+
+import android.view.View;
+import butterknife.ButterKnife.Finder;
+import butterknife.ButterKnife.ViewBinder;
+
+public class MaillGetPasswordActivity$$ViewBinder<T extends com.hxkj.cst.cheshuotong.activity.MaillGetPasswordActivity> implements ViewBinder<T> {
+  @Override public void bind(final Finder finder, final T target, Object source) {
+    View view;
+    view = finder.findRequiredView(source, 2131624175, "field 'ivMailback'");
+    target.ivMailback = finder.castView(view, 2131624175, "field 'ivMailback'");
+    view = finder.findRequiredView(source, 2131624095, "field 'etMail'");
+    target.etMail = finder.castView(view, 2131624095, "field 'etMail'");
+    view = finder.findRequiredView(source, 2131624093, "field 'relMail'");
+    target.relMail = finder.castView(view, 2131624093, "field 'relMail'");
+    view = finder.findRequiredView(source, 2131624090, "field 'tvYanzhengma'");
+    target.tvYanzhengma = finder.castView(view, 2131624090, "field 'tvYanzhengma'");
+    view = finder.findRequiredView(source, 2131624176, "field 'etYanzhengma'");
+    target.etYanzhengma = finder.castView(view, 2131624176, "field 'etYanzhengma'");
+    view = finder.findRequiredView(source, 2131624092, "field 'btGetcode'");
+    target.btGetcode = finder.castView(view, 2131624092, "field 'btGetcode'");
+    view = finder.findRequiredView(source, 2131624089, "field 'relYanzhengma'");
+    target.relYanzhengma = finder.castView(view, 2131624089, "field 'relYanzhengma'");
+    view = finder.findRequiredView(source, 2131624085, "field 'btLogin'");
+    target.btLogin = finder.castView(view, 2131624085, "field 'btLogin'");
+  }
+
+  @Override public void unbind(T target) {
+    target.ivMailback = null;
+    target.etMail = null;
+    target.relMail = null;
+    target.tvYanzhengma = null;
+    target.etYanzhengma = null;
+    target.btGetcode = null;
+    target.relYanzhengma = null;
+    target.btLogin = null;
+  }
+}

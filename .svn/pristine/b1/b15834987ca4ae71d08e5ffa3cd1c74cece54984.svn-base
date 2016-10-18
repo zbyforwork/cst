@@ -1,0 +1,30 @@
+// Generated code from Butter Knife. Do not modify!
+package com.hxkj.cst.cheshuotong.activity;
+
+import android.view.View;
+import butterknife.ButterKnife.Finder;
+import butterknife.ButterKnife.ViewBinder;
+
+public class PushSettingActivity$$ViewBinder<T extends com.hxkj.cst.cheshuotong.activity.PushSettingActivity> implements ViewBinder<T> {
+  @Override public void bind(final Finder finder, final T target, Object source) {
+    View view;
+    view = finder.findRequiredView(source, 2131624073, "field 'ivBack'");
+    target.ivBack = finder.castView(view, 2131624073, "field 'ivBack'");
+    view = finder.findRequiredView(source, 2131624243, "field 'slideNewsremind'");
+    target.slideNewsremind = finder.castView(view, 2131624243, "field 'slideNewsremind'");
+    view = finder.findRequiredView(source, 2131624246, "field 'slideNewspush'");
+    target.slideNewspush = finder.castView(view, 2131624246, "field 'slideNewspush'");
+    view = finder.findRequiredView(source, 2131624249, "field 'slideLimitpush'");
+    target.slideLimitpush = finder.castView(view, 2131624249, "field 'slideLimitpush'");
+    view = finder.findRequiredView(source, 2131624247, "field 'relUpdate'");
+    target.relUpdate = finder.castView(view, 2131624247, "field 'relUpdate'");
+  }
+
+  @Override public void unbind(T target) {
+    target.ivBack = null;
+    target.slideNewsremind = null;
+    target.slideNewspush = null;
+    target.slideLimitpush = null;
+    target.relUpdate = null;
+  }
+}

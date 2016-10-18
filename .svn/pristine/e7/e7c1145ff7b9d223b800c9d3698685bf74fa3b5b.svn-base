@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_selected="true" android:color="#ffc3d3fd" />
+    <item android:color="#ff846c06" />
+</selector><!-- From: file:/D:/cst/app/src/main/res/drawable/selector_add_car_activity_license_hanzi_hint.xml -->

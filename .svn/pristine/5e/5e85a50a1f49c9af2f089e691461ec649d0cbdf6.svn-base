@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_selected="true" android:drawable="@drawable/add_car_activity_license_blue" />
+    <item android:drawable="@drawable/add_car_activity_license_yellow" />
+</selector><!-- From: file:/D:/WORK/cst/app/src/main/res/drawable/selector_add_car_activity_license_background.xml -->

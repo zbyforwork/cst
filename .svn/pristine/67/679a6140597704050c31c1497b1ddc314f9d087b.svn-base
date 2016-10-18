@@ -1,0 +1,190 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                tools:context="com.hxkj.cst.cheshuotong.activity.AccountloginActivity">
+
+    <RelativeLayout
+        android:id="@+id/re_top"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginBottom="5dp"
+        android:background="@color/appColor"
+        >
+
+        <ImageView
+            android:id="@+id/iv_back"
+            android:layout_width="@dimen/title_image_width_25"
+            android:layout_height="@dimen/title_image_height_25"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:src="@drawable/back"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerInParent="true"
+            android:text="账户登录"
+            android:textColor="@color/bg_White"
+            android:textSize="@dimen/title_font_size"
+            />
+
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/re_top"
+        android:layout_marginTop="20dp">
+
+        <View
+            android:id="@+id/view1"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/thin_divider"
+            android:background="#E0E0E0"/>
+
+        <RelativeLayout
+            android:id="@+id/relative"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:layout_below="@+id/view1"
+            android:background="#F7F7F7">
+
+
+            <RelativeLayout
+                android:id="@+id/rel_phone"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:background="#FFFFFF">
+
+
+                <TextView
+                    android:id="@+id/tv_phoneNumber"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginTop="10dp"
+                    android:text="账    户"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/normal_font_size"/>
+
+                <EditText
+                    android:id="@+id/et_number"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="100dp"
+                    android:hint=" 注册的手机号"
+                    android:singleLine="true"
+                    android:background="@null"
+                    android:inputType="number"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/normal_font_size"/>
+
+                <View
+                    android:id="@+id/view3"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/thin_divider"
+                    android:layout_alignParentBottom="true"
+                    android:background="#E0E0E0"/>
+            </RelativeLayout>
+
+          </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rel_password"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_below="@+id/relative"
+            android:background="#FFFFFF">
+
+
+            <TextView
+                android:id="@+id/tv_password"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="5dp"
+                android:background="@null"
+                android:singleLine="true"
+                android:text="密    码"
+                android:textColor="@color/black"
+                android:textSize="@dimen/normal_font_size"/>
+
+            <EditText
+                android:id="@+id/et_password"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="100dp"
+                android:hint="请输入密码"
+                android:singleLine="true"
+                android:background="@null"
+                android:textColor="@color/black"
+                android:inputType="textPassword"
+                android:textSize="@dimen/normal_font_size"/>
+
+            <View
+                android:id="@+id/view4"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/thin_divider"
+                android:layout_alignParentBottom="true"
+                android:background="#E0E0E0"/>
+        </RelativeLayout>
+
+
+
+    </RelativeLayout>
+
+    <Button
+        android:id="@+id/bt_login"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginRight="40dp"
+        android:layout_marginLeft="40dp"
+        android:layout_below="@+id/relativeLayout"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="35dp"
+        android:background="@drawable/buttongrey"
+        android:text="登 录"
+        android:textColor="@color/bg_White"
+        android:textSize="@dimen/normal_font_size"/>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/bt_login"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        >
+
+        <TextView
+            android:id="@+id/tv_register"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:text="注册"
+            />
+
+        <TextView
+            android:id="@+id/tv_getmssingcode"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="80dp"
+            android:layout_weight="0.5"
+            android:text="找回密码"
+            />
+
+
+    </LinearLayout>
+
+    </RelativeLayout>
+<!-- From: file:/D:/WORK/cst/app/src/main/res/layout/activity_account_login.xml -->

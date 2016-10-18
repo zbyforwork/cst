@@ -1,0 +1,30 @@
+// Generated code from Butter Knife. Do not modify!
+package com.hxkj.cst.cheshuotong.activity;
+
+import android.view.View;
+import butterknife.ButterKnife.Finder;
+import butterknife.ButterKnife.ViewBinder;
+
+public class ShowAppointmentActivity$$ViewBinder<T extends com.hxkj.cst.cheshuotong.activity.ShowAppointmentActivity> implements ViewBinder<T> {
+  @Override public void bind(final Finder finder, final T target, Object source) {
+    View view;
+    view = finder.findRequiredView(source, 2131624073, "field 'ivBack'");
+    target.ivBack = finder.castView(view, 2131624073, "field 'ivBack'");
+    view = finder.findRequiredView(source, 2131624219, "field 'tvName'");
+    target.tvName = finder.castView(view, 2131624219, "field 'tvName'");
+    view = finder.findRequiredView(source, 2131624216, "field 'tvAddress'");
+    target.tvAddress = finder.castView(view, 2131624216, "field 'tvAddress'");
+    view = finder.findRequiredView(source, 2131624217, "field 'tvTel'");
+    target.tvTel = finder.castView(view, 2131624217, "field 'tvTel'");
+    view = finder.findRequiredView(source, 2131624262, "field 'ivEwm'");
+    target.ivEwm = finder.castView(view, 2131624262, "field 'ivEwm'");
+  }
+
+  @Override public void unbind(T target) {
+    target.ivBack = null;
+    target.tvName = null;
+    target.tvAddress = null;
+    target.tvTel = null;
+    target.ivEwm = null;
+  }
+}

@@ -1,0 +1,33 @@
+// Generated code from Butter Knife. Do not modify!
+package com.hxkj.cst.cheshuotong.activity;
+
+import android.view.View;
+import butterknife.ButterKnife.Finder;
+import butterknife.ButterKnife.ViewBinder;
+
+public class AccountloginActivity$$ViewBinder<T extends com.hxkj.cst.cheshuotong.activity.AccountloginActivity> implements ViewBinder<T> {
+  @Override public void bind(final Finder finder, final T target, Object source) {
+    View view;
+    view = finder.findRequiredView(source, 2131624073, "field 'ivBack'");
+    target.ivBack = finder.castView(view, 2131624073, "field 'ivBack'");
+    view = finder.findRequiredView(source, 2131624079, "field 'etNumber'");
+    target.etNumber = finder.castView(view, 2131624079, "field 'etNumber'");
+    view = finder.findRequiredView(source, 2131624083, "field 'etPassword'");
+    target.etPassword = finder.castView(view, 2131624083, "field 'etPassword'");
+    view = finder.findRequiredView(source, 2131624085, "field 'btLogin'");
+    target.btLogin = finder.castView(view, 2131624085, "field 'btLogin'");
+    view = finder.findRequiredView(source, 2131624086, "field 'tvRegister'");
+    target.tvRegister = finder.castView(view, 2131624086, "field 'tvRegister'");
+    view = finder.findRequiredView(source, 2131624087, "field 'tvGetmssingcode'");
+    target.tvGetmssingcode = finder.castView(view, 2131624087, "field 'tvGetmssingcode'");
+  }
+
+  @Override public void unbind(T target) {
+    target.ivBack = null;
+    target.etNumber = null;
+    target.etPassword = null;
+    target.btLogin = null;
+    target.tvRegister = null;
+    target.tvGetmssingcode = null;
+  }
+}

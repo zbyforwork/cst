@@ -1,0 +1,30 @@
+// Generated code from Butter Knife. Do not modify!
+package com.hxkj.cst.cheshuotong.activity;
+
+import android.view.View;
+import butterknife.ButterKnife.Finder;
+import butterknife.ButterKnife.ViewBinder;
+
+public class PayTaxesActivity$$ViewBinder<T extends com.hxkj.cst.cheshuotong.activity.PayTaxesActivity> implements ViewBinder<T> {
+  @Override public void bind(final Finder finder, final T target, Object source) {
+    View view;
+    view = finder.findRequiredView(source, 2131624198, "field 'mTvPlace'");
+    target.mTvPlace = finder.castView(view, 2131624198, "field 'mTvPlace'");
+    view = finder.findRequiredView(source, 2131624199, "field 'mBtNext'");
+    target.mBtNext = finder.castView(view, 2131624199, "field 'mBtNext'");
+    view = finder.findRequiredView(source, 2131624201, "field 'mMvProvince'");
+    target.mMvProvince = finder.castView(view, 2131624201, "field 'mMvProvince'");
+    view = finder.findRequiredView(source, 2131624202, "field 'mMvCity'");
+    target.mMvCity = finder.castView(view, 2131624202, "field 'mMvCity'");
+    view = finder.findRequiredView(source, 2131624073, "field 'mIvBack'");
+    target.mIvBack = finder.castView(view, 2131624073, "field 'mIvBack'");
+  }
+
+  @Override public void unbind(T target) {
+    target.mTvPlace = null;
+    target.mBtNext = null;
+    target.mMvProvince = null;
+    target.mMvCity = null;
+    target.mIvBack = null;
+  }
+}

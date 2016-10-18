@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_selected="true">
+        <shape android:shape="rectangle">
+            <corners android:radius="30.0dip" />
+            <stroke android:width="1.0px" android:color="#ff17b0ff" />
+            <solid android:color="@android:color/transparent" />
+        </shape>
+    </item>
+    <item>
+        <shape android:shape="rectangle">
+            <corners android:radius="30.0dip" />
+            <solid android:color="@android:color/transparent" />
+            <stroke android:width="1.0px" android:color="#ffadadad" />
+        </shape>
+    </item>
+</selector><!-- From: file:/D:/cst/app/src/main/res/drawable-hdpi/selector_add_car_activity_oval_rect_background.xml -->

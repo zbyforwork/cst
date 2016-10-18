@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.hxkj.cst.cheshuotong" >
+
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <!-- 照相 -->
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <!-- 这个权限用于进行网络定位 -->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <!-- 这个权限用于访问GPS定位 -->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <!-- 用于访问wifi网络信息，wifi信息会用于进行网络定位 -->
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <!-- 获取运营商信息，用于支持提供运营商信息相关的接口 -->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <!-- 这个权限用于获取wifi的获取权限，wifi信息会用来进行网络定位 -->
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <!-- 用于读取手机当前的状态 -->
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <!-- 写入扩展存储，向扩展卡写入数据，用于写入离线定位数据 -->
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
+    <!-- 接收开机广播信息 -->
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.BATTERY_STATS" />
+    <!-- 振动 -->
+    <uses-permission android:name="android.permission.VIBRATE" />
+
+    <application
+        android:name=".TApplication"
+        android:allowBackup="true"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme.Base"
+        tools:replace="android:theme" >
+        <activity
+            android:name=".MainActivity"
+            android:label="@string/app_name" >
+        </activity>
+        <activity
+            android:name=".WelcomActivtiy"
+            android:icon="@mipmap/ic_launcher"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".activity.AccountRegisterActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".activity.AccountloginActivity"
+            android:label="@string/title_activity_account_login"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".activity.MaillGetPasswordActivity"
+            android:label="@string/title_activity_maill_getpassword"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".activity.WayOfGetpasswordActivity"
+            android:label="@string/title_activity_way_of_getpassword"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".activity.PasswordResetActivity"
+            android:label="@string/title_activity_password_reset"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".activity.CarManageActivitty"
+            android:label="@string/title_activity_car_manage_activitty"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".activity.PersonalSetActivity"
+            android:label="@string/title_activity_personal_set"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".activity.AddCarActivity"
+            android:label="@string/title_activity_add_car"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".activity.AccountRegisterFirstActivity"
+            android:label="@string/title_activity_account_register_first"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".activity.BreakRulesRecordActivity"
+            android:label="@string/title_activity_break_rules_record"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".activity.BreakRulesRecordInActivity"
+            android:label="@string/title_activity_break_rules_record_in"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".activity.NewsCenterActivity"
+            android:label="@string/title_activity_news_center"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".activity.SettingActivity"
+            android:label="@string/title_activity_setting"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".activity.PushSettingActivity"
+            android:label="@string/title_activity_push_setting"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".activity.FeedBackActivity"
+            android:label="@string/title_activity_feed_back"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".activity.PlaceLocationActivity"
+            android:label="@string/title_activity_place_location"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".activity.PhoneGetPasswordActivity"
+            android:label="@string/title_activity_phone_get_password"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".activity.PayTaxesTwo"
+            android:label="@string/title_activity_pay_taxes_two"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".activity.PayTaxesThree"
+            android:label="@string/title_activity_pay_taxes_three" >
+        </activity>
+        <activity
+            android:name=".activity.SelectCarTypeActivity"
+            android:label="@string/title_activity_select_car_type"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".activity.ChooseUserCarTypeActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".activity.PayTaxesFive"
+            android:label="@string/title_activity_select_car_type"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".activity.PayTaxesSix"
+            android:label="@string/title_activity_select_car_type"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".activity.PayTaxesSeven"
+            android:label="@string/title_activity_select_car_type"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".activity.Xuanhao_PlaceLocationActivity"
+            android:label="@string/title_activity_place_location"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".activity.WebViewActivity"
+            android:label="@string/title_activity_place_location"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".activity.ArchivesActivity"
+            android:label="@string/title_activity_archives"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".activity.BuilddingActivity"
+            android:label="@string/title_activity_buildding" >
+        </activity>
+        <activity
+            android:name="cn.hugo.android.scanner.CaptureActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateAlwaysHidden" >
+        </activity>
+        <activity android:name=".activity.SingleTouchImageViewActivity" >
+        </activity>
+        <activity android:name=".activity.ArchivesContentActivity" >
+        </activity>
+        <!-- 预约 -->
+        <activity
+            android:name=".activity.AppointmentActivity"
+            android:label="@string/title_activity_appointment"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".activity.PayTaxesActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".activity.CarDetailActivity"
+            android:label="@string/title_activity_car_detail"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".activity.BreakRuleActivity"
+            android:label="@string/title_activity_break_rule"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity android:name=".activity.ShowAppointmentActivity" >
+        </activity>
+        <activity android:name="com.unionpay.uppay.PayActivity">
+        </activity>
+    </application>
+
+</manifest>

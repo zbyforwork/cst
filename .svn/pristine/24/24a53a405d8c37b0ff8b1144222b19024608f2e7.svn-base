@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- From: file:/Users/Sai/Documents/workpace/android/github/Android-ConvenientBanner/convenientbanner/src/main/res/values/strings.xml -->
+    <eat-comment/>
+    <item name="cb_item_tag" type="id"/>
+</resources>

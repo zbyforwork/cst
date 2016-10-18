@@ -1,0 +1,21 @@
+// Generated code from Butter Knife. Do not modify!
+package com.hxkj.cst.cheshuotong.activity;
+
+import android.view.View;
+import butterknife.ButterKnife.Finder;
+import butterknife.ButterKnife.ViewBinder;
+
+public class AppointmentActivity$$ViewBinder<T extends com.hxkj.cst.cheshuotong.activity.AppointmentActivity> implements ViewBinder<T> {
+  @Override public void bind(final Finder finder, final T target, Object source) {
+    View view;
+    view = finder.findRequiredView(source, 2131624073, "field 'mIvBack'");
+    target.mIvBack = finder.castView(view, 2131624073, "field 'mIvBack'");
+    view = finder.findRequiredView(source, 2131624135, "field 'mLvSwjg'");
+    target.mLvSwjg = finder.castView(view, 2131624135, "field 'mLvSwjg'");
+  }
+
+  @Override public void unbind(T target) {
+    target.mIvBack = null;
+    target.mLvSwjg = null;
+  }
+}

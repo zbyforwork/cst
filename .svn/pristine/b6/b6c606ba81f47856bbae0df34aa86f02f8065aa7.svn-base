@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_selected="true" android:drawable="@drawable/add_car_activity_arrow_white" />
+    <item android:drawable="@drawable/add_car_activity_arrow_black" />
+</selector><!-- From: file:/D:/cst/app/src/main/res/drawable-hdpi/selecor_add_car_activity_lincense_hanzi_arrow.xml -->

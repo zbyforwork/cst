@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:drawable="@color/white"/>
+    <item android:state_pressed="true" android:drawable="@drawable/home_linearlayout_select"/>
+    <item android:state_focused="true" android:drawable="@drawable/home_linearlayout_select"/>
+    <item android:state_checked="true" android:drawable="@drawable/home_linearlayout_select"/>
+</selector><!-- From: file:/D:/cst/app/src/main/res/drawable/home_linearlayout_selector.xml -->

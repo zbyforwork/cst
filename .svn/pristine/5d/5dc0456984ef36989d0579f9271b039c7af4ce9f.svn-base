@@ -1,0 +1,45 @@
+// Generated code from Butter Knife. Do not modify!
+package com.hxkj.cst.cheshuotong.activity;
+
+import android.view.View;
+import butterknife.ButterKnife.Finder;
+import butterknife.ButterKnife.ViewBinder;
+
+public class PasswordResetActivity$$ViewBinder<T extends com.hxkj.cst.cheshuotong.activity.PasswordResetActivity> implements ViewBinder<T> {
+  @Override public void bind(final Finder finder, final T target, Object source) {
+    View view;
+    view = finder.findRequiredView(source, 2131624189, "field 'ivPasswordback'");
+    target.ivPasswordback = finder.castView(view, 2131624189, "field 'ivPasswordback'");
+    view = finder.findRequiredView(source, 2131624191, "field 'etNewpassword'");
+    target.etNewpassword = finder.castView(view, 2131624191, "field 'etNewpassword'");
+    view = finder.findRequiredView(source, 2131624081, "field 'relPassword'");
+    target.relPassword = finder.castView(view, 2131624081, "field 'relPassword'");
+    view = finder.findRequiredView(source, 2131624076, "field 'relative'");
+    target.relative = finder.castView(view, 2131624076, "field 'relative'");
+    view = finder.findRequiredView(source, 2131624193, "field 'tvChongfu'");
+    target.tvChongfu = finder.castView(view, 2131624193, "field 'tvChongfu'");
+    view = finder.findRequiredView(source, 2131624194, "field 'etChongfu'");
+    target.etChongfu = finder.castView(view, 2131624194, "field 'etChongfu'");
+    view = finder.findRequiredView(source, 2131624195, "field 'tvInfo'");
+    target.tvInfo = finder.castView(view, 2131624195, "field 'tvInfo'");
+    view = finder.findRequiredView(source, 2131624192, "field 'relChongfu'");
+    target.relChongfu = finder.castView(view, 2131624192, "field 'relChongfu'");
+    view = finder.findRequiredView(source, 2131624074, "field 'relativeLayout'");
+    target.relativeLayout = finder.castView(view, 2131624074, "field 'relativeLayout'");
+    view = finder.findRequiredView(source, 2131624085, "field 'btLogin'");
+    target.btLogin = finder.castView(view, 2131624085, "field 'btLogin'");
+  }
+
+  @Override public void unbind(T target) {
+    target.ivPasswordback = null;
+    target.etNewpassword = null;
+    target.relPassword = null;
+    target.relative = null;
+    target.tvChongfu = null;
+    target.etChongfu = null;
+    target.tvInfo = null;
+    target.relChongfu = null;
+    target.relativeLayout = null;
+    target.btLogin = null;
+  }
+}

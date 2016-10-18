@@ -1,0 +1,55 @@
+<resources>
+    <string name="app_name">车税通</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_welcom">WelcomActivity</string>
+    <string name="title_activity_welcom_activtiy">WelcomActivtiy</string>
+    <string name="title_activity_account_register">account_register</string>
+    <string name="title_activity_account_login">account_login</string>
+    <string name="title_activity_maill_getpassword">maill_getpassword</string>
+    <string name="title_activity_way_of_getpassword">way_of_getpassword</string>
+    <string name="title_activity_main2">Main2Activity</string>
+    <string name="title_activity_password_reset">PasswordResetActivity</string>
+    <string name="title_activity_car_manage_activitty">CarManageActivitty</string>
+    <string name="title_activity_personal_set">PersonalSetActivity</string>
+    <string name="title_activity_add_car">AddCarActivity</string>
+    <string name="title_activity_account_register_first">AccountRegisterFirstActivity</string>
+    <string name="title_activity_break_rules_record">BreakRulesRecordActivity</string>
+    <string name="title_activity_break_rules_record_in">BreakRulesRecordInActivity</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_news_center">NewsCenterActivity</string>
+    <string name="title_activity_add_cars">AddCarsActivity</string>
+    <string name="tips">所填信息为当地交管局查询所必需信息，我们将对你的信息严格保密，请放心填写。</string>
+    <string name="feedback">请填写您要说的话，我们会第一时间给您反馈，谢谢您的支持！</string>
+
+    <string name="title_activity_setting">SettingActivity</string>
+    <string name="title_activity_push_setting">PushSettingActivity</string>
+    <string name="title_activity_feed_back">FeedBackActivity</string>
+    <string name="title_activity_place_location">PlaceLocationActivity</string>
+    <string name="title_activity_phone_get_password">PhoneGetPasswordActivity</string>
+    <string name="title_activity_pay_taxes_one">PayTaxes_one</string>
+    <string name="title_activity_pay_taxes_two">PayTaxesTwo</string>
+    <string name="tax_tips">以上车辆信息仅用于违章查询，我们将严格保密，请你放心填写。</string>
+    <string name="title_activity_pay_taxes_three">PayTaxesThree</string>
+    <string name="title_activity_select_pay_taxes_address">SelectPayTaxesAddress</string>
+    <string name="title_activity_select_car_type">SelectCarTypeActivity</string>
+    <string name="scan_text">建议与镜头保持20cm距离,尽量避免逆光和阴影</string>
+    <string name="title_activity_archives">ArchivesActivity</string>
+    <string name="title_activity_buildding">BuilddingActivity</string>
+
+    <string name="placeHolder">placeHolder</string>
+    <string name="seekbar_add">+</string>
+    <string name="seekbar_minus">-</string>
+    <string name="create">生成</string>
+    <string name="scan_failed">扫描失败</string>
+    <string name="bottom_hint">建议与镜头保持10CM距离，尽量避免逆光和阴影</string>
+    <string name="top_hint">将条形码或二维码置于取景框内系统会自动扫描</string>
+    <string name="cancel">取消</string>
+    <string name="msg_camera_framework_bug">抱歉，Android相机出现问题。您可能需要重启设备。</string>
+    <string name="button_ok">确定</string>
+    <string name="title_activity_upload_car_type">UploadCarType</string>
+    <string name="title_activity_appointment">AppointmentActivity</string>
+    <string name="title_activity_car_detail">CarDetailActivity</string>
+    <string name="title_activity_break_rule">BreakRuleActivity</string>
+</resources>
