@@ -18,18 +18,18 @@ import com.marshalchen.ultimaterecyclerview.UltimateRecyclerView;
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class Xuanhao_PlaceLocationActivity extends Activity {
 
-    @Bind(R.id.iv_back)
+    @BindView(R.id.iv_back)
     ImageView mIvBack;
-    @Bind(R.id.recycleview_province)
+    @BindView(R.id.recycleview_province)
     UltimateRecyclerView mRecycleviewProvince;
-    @Bind(R.id.recycleview_city)
+    @BindView(R.id.recycleview_city)
     UltimateRecyclerView mRecycleviewCity;
-    @Bind(R.id.drawer_layout)
+    @BindView(R.id.drawer_layout)
     public DrawerLayout mDrawerLayout;
 
     List<Province> mProvinceList;

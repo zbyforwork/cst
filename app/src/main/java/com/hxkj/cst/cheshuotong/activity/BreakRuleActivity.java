@@ -11,14 +11,14 @@ import android.widget.ImageView;
 
 import com.hxkj.cst.cheshuotong.R;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class BreakRuleActivity extends Activity {
 
-    @Bind(R.id.iv_back)
+    @BindView(R.id.iv_back)
     ImageView ivBack;
-    @Bind(R.id.webView)
+    @BindView(R.id.webView)
     WebView webView;
 
     @Override

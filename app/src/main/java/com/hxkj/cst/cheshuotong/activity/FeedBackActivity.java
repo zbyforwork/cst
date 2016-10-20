@@ -10,7 +10,7 @@ import android.widget.ScrollView;
 
 import com.hxkj.cst.cheshuotong.R;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class FeedBackActivity extends Activity implements View.OnClickListener{
@@ -18,24 +18,24 @@ public class FeedBackActivity extends Activity implements View.OnClickListener{
     /**
      * 返回
      */
-    @Bind(R.id.iv_back)
+    @BindView(R.id.iv_back)
     ImageView ivBack;
     /**
      * 用户账号
      */
-    @Bind(R.id.et_Number)
+    @BindView(R.id.et_Number)
     EditText etNumber;
     /**
      * 意见内容
      */
-    @Bind(R.id.et_content)
+    @BindView(R.id.et_content)
     EditText etContent;
-    @Bind(R.id.sc_content)
+    @BindView(R.id.sc_content)
     ScrollView scContent;
     /**
      * 提交
      */
-    @Bind(R.id.bt_submit)
+    @BindView(R.id.bt_submit)
     Button btSubmit;
 
     @Override

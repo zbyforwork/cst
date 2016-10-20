@@ -1,39 +1,35 @@
 package com.hxkj.cst.cheshuotong.activity;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.ListView;
 
-import com.android.volley.AuthFailureError;
-import com.android.volley.Request;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
 import com.hxkj.cst.cheshuotong.R;
 import com.hxkj.cst.cheshuotong.TApplication;
 import com.hxkj.cst.cheshuotong.adapter.CarInfoAdapter;
-import com.hxkj.cst.cheshuotong.adapter.OrderAdapter;
 import com.hxkj.cst.cheshuotong.bean.CarInfoSimple;
 import com.hxkj.cst.cheshuotong.utils.Base64;
 import com.hxkj.cst.cheshuotong.utils.ConstKey;
 import com.hxkj.cst.cheshuotong.utils.GsonTools;
 import com.hxkj.cst.cheshuotong.utils.MyLog;
-import com.hxkj.cst.cheshuotong.utils.MyToast;
 import com.hxkj.cst.cheshuotong.utils.ParamsBuilder;
 import com.hxkj.cst.cheshuotong.utils.ParseReturnUtil;
 import com.marshalchen.ultimaterecyclerview.UltimateRecyclerView;
+import com.nohttp.CallServer;
+import com.nohttp.HttpListener;
+import com.yolanda.nohttp.NoHttp;
+import com.yolanda.nohttp.RequestMethod;
+import com.yolanda.nohttp.rest.Request;
+import com.yolanda.nohttp.rest.Response;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Map;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class CarManageActivitty extends Activity {
@@ -41,9 +37,9 @@ public class CarManageActivitty extends Activity {
     /**
      * 返回
      */
-    @Bind(R.id.iv_back)
+    @BindView(R.id.iv_back)
     ImageView ivBack;
-    @Bind(R.id.list_car_info)
+    @BindView(R.id.list_car_info)
     UltimateRecyclerView listCarInfo;
     ArrayList<CarInfoSimple> mCarInfoList;
 
@@ -80,42 +76,36 @@ public class CarManageActivitty extends Activity {
 
     private void getData() {
         String url = ConstKey.GET_CAR_LIST_ADDRESS + ParamsBuilder.getParams();
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        MyLog.i(response);
-                        String retContent = ParseReturnUtil.parseRetrun(response, CarManageActivitty.this);
-                        MyLog.i(retContent);
-                        if (TextUtils.isEmpty(retContent)){
-                            return;
-                        }
-                        mCarInfoList= (ArrayList<CarInfoSimple>) GsonTools.parserJsonToArrayBeans(retContent,"CARS",CarInfoSimple.class);
-                        LinearLayoutManager lm=new LinearLayoutManager(CarManageActivitty.this);
-                        CarInfoAdapter adpater = new CarInfoAdapter(CarManageActivitty.this, mCarInfoList);
-                        listCarInfo .setLayoutManager(lm);
-                        listCarInfo.setAdapter(adpater);
-                        listCarInfo.setRefreshing(false);
-                    }
+        Request<String> request = NoHttp.createStringRequest(url, RequestMethod.POST);
+        HashMap<String, String> map = new HashMap<>();
+        map.put("YHID", TApplication.app.mUserId);
+        String content = Base64.encodeToString(ParamsBuilder.hashMapToJson(map).getBytes(), Base64.DEFAULT);
+        map.clear();
+        MyLog.i(content);
+        map.put("content", content);
+        request.add(map);
+        CallServer.getRequestInstance().add(this, 0, request, new HttpListener<String>() {
+            @Override
+            public void onSucceed(int what, Response<String> response) {
+                MyLog.i(response.get());
+                String retContent = ParseReturnUtil.parseRetrun(response.get(), CarManageActivitty.this);
+                MyLog.i(retContent);
+                if (TextUtils.isEmpty(retContent)){
+                    return;
                 }
-                , new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
+                mCarInfoList= (ArrayList<CarInfoSimple>) GsonTools.parserJsonToArrayBeans(retContent,"CARS",CarInfoSimple.class);
+                LinearLayoutManager lm=new LinearLayoutManager(CarManageActivitty.this);
+                CarInfoAdapter adpater = new CarInfoAdapter(CarManageActivitty.this, mCarInfoList);
+                listCarInfo .setLayoutManager(lm);
+                listCarInfo.setAdapter(adpater);
+                listCarInfo.setRefreshing(false);
             }
-        }) {
+
             @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                HashMap<String, String> map = new HashMap<>();
-                map.put("YHID", TApplication.app.mUserId);
-                String content = Base64.encodeToString(ParamsBuilder.hashMapToJson(map).getBytes(), Base64.DEFAULT);
-                map.clear();
-                MyLog.i(content);
-                map.put("content", content);
-                return map;
+            public void onFailed(int what, String url, Object tag, String error, int resCode, long ms) {
+
             }
-        };
-        // 把这个请求加入请求队列
-        TApplication.app.addToRequestQueue(stringRequest);
+        },false,false);
     }
 
     private void setListener() {

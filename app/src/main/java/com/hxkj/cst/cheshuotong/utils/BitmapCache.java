@@ -1,23 +1,16 @@
 package com.hxkj.cst.cheshuotong.utils;
 
-import java.io.ByteArrayOutputStream;
+import android.content.Context;
+import android.graphics.Bitmap;
+import android.support.v4.util.LruCache;
+
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.os.Environment;
-import android.support.v4.util.LruCache;
-import android.util.Log;
 
-import com.android.volley.toolbox.ImageLoader.ImageCache;
 
-public class BitmapCache implements ImageCache {	
+public class BitmapCache {
 	
 	static List<String> existFile=new ArrayList<String>();//�Ѿ����ڵ��ļ��б�
 	
@@ -55,7 +48,7 @@ public class BitmapCache implements ImageCache {
 
     
     
-    @Override
+/*    @Override
     public Bitmap getBitmap(String url) {
     	Bitmap bitmap=cache.get(url);
     	if (bitmap!=null) {
@@ -87,5 +80,5 @@ public class BitmapCache implements ImageCache {
 		} catch (Exception e) {
 		e.printStackTrace();
 		}
-    }
+    }*/
 }

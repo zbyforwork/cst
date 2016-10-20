@@ -10,7 +10,7 @@ import android.widget.RelativeLayout;
 import com.hxkj.cst.cheshuotong.R;
 import com.hxkj.cst.cheshuotong.utils.ExceptionUtil;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class WayOfGetpasswordActivity extends Activity implements View.OnClickListener {
@@ -18,17 +18,17 @@ public class WayOfGetpasswordActivity extends Activity implements View.OnClickLi
     /**
      * 返回
      */
-    @Bind(R.id.iv_back)
+    @BindView(R.id.iv_back)
     ImageView ivBack;
     /**
      * 手机找回
      */
-    @Bind(R.id.rel_byphone)
+    @BindView(R.id.rel_byphone)
     RelativeLayout relByphone;
     /**
      * 邮箱找回
      */
-   /* @Bind(R.id.rel_byMail)
+   /* @BindView(R.id.rel_byMail)
     RelativeLayout relByMail;*/
 
     @Override

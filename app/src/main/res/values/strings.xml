@@ -52,4 +52,21 @@
     <string name="title_activity_appointment">AppointmentActivity</string>
     <string name="title_activity_car_detail">CarDetailActivity</string>
     <string name="title_activity_break_rule">BreakRuleActivity</string>
+
+
+    <string name="ihc_card_nick">车辆昵称：</string>
+    <string name="ich_card_model">车辆型号：</string>
+    <string name="ihc_card_number">车辆号码：</string>
+
+    <!--HomeFragment Icon-->
+    <string name="icon_circum">周边</string>
+    <string name="icon_add_card">添加车辆</string>
+    <string name="icon_peccancy">违章查询</string>
+    <string name="icon_Archives">档案</string>
+    <string name="icon_paytax">缴税</string>
+    <string name="map_title">周边</string>
+    <string name="map_nav_jyz">加油站</string>
+    <string name="map_nav_tcc">停车场</string>
+    <string name="map_nav_4s">4S店</string>
+    <string name="map_nav_xc">洗车</string>
 </resources>

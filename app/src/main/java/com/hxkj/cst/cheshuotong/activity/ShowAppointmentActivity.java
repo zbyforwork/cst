@@ -2,22 +2,14 @@ package com.hxkj.cst.cheshuotong.activity;
 
 import android.app.Activity;
 import android.graphics.Bitmap;
-import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.android.volley.AuthFailureError;
-import com.android.volley.Request;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
-import com.facebook.drawee.view.SimpleDraweeView;
 import com.google.zxing.WriterException;
 import com.hxkj.cst.cheshuotong.R;
-import com.hxkj.cst.cheshuotong.TApplication;
 import com.hxkj.cst.cheshuotong.bean.YYXX;
 import com.hxkj.cst.cheshuotong.utils.Base64;
 import com.hxkj.cst.cheshuotong.utils.ConstKey;
@@ -27,28 +19,33 @@ import com.hxkj.cst.cheshuotong.utils.MyLog;
 import com.hxkj.cst.cheshuotong.utils.ParamsBuilder;
 import com.hxkj.cst.cheshuotong.utils.ParseReturnUtil;
 import com.hxkj.cst.cheshuotong.utils.QRGenerate;
+import com.nohttp.CallServer;
+import com.nohttp.HttpListener;
+import com.yolanda.nohttp.NoHttp;
+import com.yolanda.nohttp.RequestMethod;
+import com.yolanda.nohttp.rest.Request;
+import com.yolanda.nohttp.rest.Response;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Map;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class ShowAppointmentActivity extends Activity {
 
-    @Bind(R.id.iv_back)
+    @BindView(R.id.iv_back)
     ImageView ivBack;
-    @Bind(R.id.tv_name)
+    @BindView(R.id.tv_name)
     TextView tvName;
-    @Bind(R.id.tv_address)
+    @BindView(R.id.tv_address)
     TextView tvAddress;
-    @Bind(R.id.tv_tel)
+    @BindView(R.id.tv_tel)
     TextView tvTel;
-    @Bind(R.id.iv_ewm)
+    @BindView(R.id.iv_ewm)
     ImageView ivEwm;
     String mEwm;
     String mSwjgdm;
@@ -75,45 +72,38 @@ public class ShowAppointmentActivity extends Activity {
      */
     private void getData() {
         String url = ConstKey.CLYYJS_ADDRESS + ParamsBuilder.getParams();
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        MyLog.i(response);
-                        final String retContent = ParseReturnUtil.parseRetrun(response, ShowAppointmentActivity.this);
-                        if (retContent == null || retContent.equals("{}")) {
-                            return;
-                        }
-                        try {
-                            JSONObject obj=new JSONObject(retContent);
-                            mEwm=obj.getString("EWM");
-                            showEwm(mEwm);
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                        ArrayList<YYXX> mYYXXList = (ArrayList<YYXX>) GsonTools.parserJsonToArrayBeans(retContent, "SWJGXX", YYXX.class);
-                        showYYXX(mYYXXList.get(0));
-                    }
+        Request<String> request = NoHttp.createStringRequest(url, RequestMethod.POST);
+        HashMap<String, String> map = new HashMap<>();
+        map.put("SWJGDM", mSwjgdm);
+        String content = Base64.encodeToString(ParamsBuilder.hashMapToJson(map).getBytes(), Base64.DEFAULT);
+        map.clear();
+        MyLog.i(content);
+        map.put("content", content);
+        request.add(map);
+        CallServer.getRequestInstance().add(this, 0, request, new HttpListener<String>() {
+            @Override
+            public void onSucceed(int what, Response<String> response) {
+                MyLog.i(response.get());
+                final String retContent = ParseReturnUtil.parseRetrun(response.get(), ShowAppointmentActivity.this);
+                if (retContent == null || retContent.equals("{}")) {
+                    return;
                 }
-                , new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
+                try {
+                    JSONObject obj=new JSONObject(retContent);
+                    mEwm=obj.getString("EWM");
+                    showEwm(mEwm);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                ArrayList<YYXX> mYYXXList = (ArrayList<YYXX>) GsonTools.parserJsonToArrayBeans(retContent, "SWJGXX", YYXX.class);
+                showYYXX(mYYXXList.get(0));
             }
-        }
-        ) {
+
             @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                HashMap<String, String> map = new HashMap<>();
-                map.put("SWJGDM", mSwjgdm);
-                String content = Base64.encodeToString(ParamsBuilder.hashMapToJson(map).getBytes(), Base64.DEFAULT);
-                map.clear();
-                MyLog.i(content);
-                map.put("content", content);
-                return map;
+            public void onFailed(int what, String url, Object tag, String error, int resCode, long ms) {
+
             }
-        };
-        // 把这个请求加入请求队列
-        TApplication.app.addToRequestQueue(stringRequest);
+        },false,false);
     }
 
     private void showEwm(String mEwm) {

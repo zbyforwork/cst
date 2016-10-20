@@ -1,6 +1,5 @@
 package com.hxkj.cst.cheshuotong.activity;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -14,11 +13,6 @@ import android.widget.TextView;
 
 import com.afollestad.materialdialogs.GravityEnum;
 import com.afollestad.materialdialogs.MaterialDialog;
-import com.android.volley.AuthFailureError;
-import com.android.volley.Request;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.hxkj.cst.cheshuotong.R;
 import com.hxkj.cst.cheshuotong.TApplication;
@@ -30,50 +24,55 @@ import com.hxkj.cst.cheshuotong.utils.GsonTools;
 import com.hxkj.cst.cheshuotong.utils.MyLog;
 import com.hxkj.cst.cheshuotong.utils.ParamsBuilder;
 import com.hxkj.cst.cheshuotong.utils.ParseReturnUtil;
+import com.nohttp.CallServer;
+import com.nohttp.HttpListener;
 import com.unionpay.UPPayAssistEx;
 import com.unionpay.uppay.PayActivity;
+import com.yolanda.nohttp.NoHttp;
+import com.yolanda.nohttp.RequestMethod;
+import com.yolanda.nohttp.rest.Request;
+import com.yolanda.nohttp.rest.Response;
 
 import java.util.HashMap;
-import java.util.Map;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class PayTaxesSeven extends AppCompatActivity {
 
-    @Bind(R.id.iv_back)
+    @BindView(R.id.iv_back)
     ImageView mIvBack;
-    @Bind(R.id.iv_car_image)
+    @BindView(R.id.iv_car_image)
     SimpleDraweeView mIvCarImage;
-    @Bind(R.id.tv_idcard)
+    @BindView(R.id.tv_idcard)
     TextView mTvIdcard;
-    @Bind(R.id.tv_tel)
+    @BindView(R.id.tv_tel)
     TextView mTvTel;
-    @Bind(R.id.tv_address)
+    @BindView(R.id.tv_address)
     TextView mTvAddress;
-    @Bind(R.id.tv_carType)
+    @BindView(R.id.tv_carType)
     TextView mTvCarType;
-    @Bind(R.id.tv_carNumber)
+    @BindView(R.id.tv_carNumber)
     TextView mTvCarNumber;
-    @Bind(R.id.tv_chejiahao)
+    @BindView(R.id.tv_chejiahao)
     TextView mTvChejiahao;
-    @Bind(R.id.tv_fadongjihao)
+    @BindView(R.id.tv_fadongjihao)
     TextView mTvFadongjihao;
-    @Bind(R.id.tv_name)
+    @BindView(R.id.tv_name)
     TextView mTvName;
-    @Bind(R.id.tv_price)
+    @BindView(R.id.tv_price)
     TextView mTvPrice;
-    @Bind(R.id.label_address)
+    @BindView(R.id.label_address)
     TextView mLabelAddress;
-    @Bind(R.id.bt_appointment)
+    @BindView(R.id.bt_appointment)
     Button mBtAppointment;
-    @Bind(R.id.bt_pay_taxes)
+    @BindView(R.id.bt_pay_taxes)
     Button mBtPayTaxes;
-    @Bind(R.id.tv_ybtse)
+    @BindView(R.id.tv_ybtse)
     TextView mTvYbtse;
-    @Bind(R.id.tv_min_price)
+    @BindView(R.id.tv_min_price)
     TextView mTvMinPrice;
-    @Bind(R.id.tv_deadline)
+    @BindView(R.id.tv_deadline)
     TextView mTvDeadline;
 
     private JSXX mJSXX;
@@ -149,22 +148,20 @@ public class PayTaxesSeven extends AppCompatActivity {
 
     private void testPay() {
 
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, TN_URL_01,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        MyLog.i("tn--->" + response);
-                        UPPayAssistEx.startPayByJAR(PayTaxesSeven.this, PayActivity.class, null, null,
-                                response, "01");
-                    }
-                }, new Response.ErrorListener() {
+        Request<String> request = NoHttp.createStringRequest(TN_URL_01, RequestMethod.GET);
+        CallServer.getRequestInstance().add(this, 0, request, new HttpListener<String>() {
             @Override
-            public void onErrorResponse(VolleyError error) {
+            public void onSucceed(int what, Response<String> response) {
+                MyLog.i("tn--->" + response);
+                UPPayAssistEx.startPayByJAR(PayTaxesSeven.this, PayActivity.class, null, null,
+                        response.get(), "01");
             }
-        });
-        // 把这个请求加入请求队列
-        TApplication.app.addToRequestQueue(stringRequest);
 
+            @Override
+            public void onFailed(int what, String url, Object tag, String error, int resCode, long ms) {
+
+            }
+        },false,false);
     }
 
     @Override
@@ -237,39 +234,33 @@ public class PayTaxesSeven extends AppCompatActivity {
      */
     private void getJsxxData() {
         String url = ConstKey.CLJSSB_ADDRESS + ParamsBuilder.getParams();
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        String retContent = ParseReturnUtil.parseRetrun(response, PayTaxesSeven.this);
-                        if (TextUtils.isEmpty(retContent)) {
-                            return;
-                        }
-                        MyLog.i(retContent);
-                        mJSXX = GsonTools.parserJsonToArrayBean(retContent, JSXX.class);
-                        showJSXX();
-                    }
-                }, new Response.ErrorListener() {
+        Request<String> request = NoHttp.createStringRequest(url,RequestMethod.POST);
+        HashMap<String, String> map = new HashMap<>();
+        map.put("CLJSDD", "510100");
+        map.put("CLLBID", TApplication.app.mCLLBID);
+        map.put("CLJSSBID", TApplication.app.mCLJSSBID);
+        String content = Base64.encodeToString(ParamsBuilder.hashMapToJson(map).getBytes(), Base64.DEFAULT);
+        map.clear();
+        MyLog.i(content);
+        map.put("content", content);
+        request.add(map);
+        CallServer.getRequestInstance().add(this, 0, request, new HttpListener<String>() {
             @Override
-            public void onErrorResponse(VolleyError error) {
+            public void onSucceed(int what, Response<String> response) {
+                String retContent = ParseReturnUtil.parseRetrun(response.get(), PayTaxesSeven.this);
+                if (TextUtils.isEmpty(retContent)) {
+                    return;
+                }
+                MyLog.i(retContent);
+                mJSXX = GsonTools.parserJsonToArrayBean(retContent, JSXX.class);
+                showJSXX();
             }
-        }) {
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                HashMap<String, String> map = new HashMap<>();
-                map.put("CLJSDD", "510100");
-                map.put("CLLBID", TApplication.app.mCLLBID);
-                map.put("CLJSSBID", TApplication.app.mCLJSSBID);
-                String content = Base64.encodeToString(ParamsBuilder.hashMapToJson(map).getBytes(), Base64.DEFAULT);
-                map.clear();
-                MyLog.i(content);
-                map.put("content", content);
-                return map;
-            }
-        };
-        // 把这个请求加入请求队列
-        TApplication.app.addToRequestQueue(stringRequest);
 
+            @Override
+            public void onFailed(int what, String url, Object tag, String error, int resCode, long ms) {
+
+            }
+        },false,false);
     }
 
     /**
@@ -279,40 +270,34 @@ public class PayTaxesSeven extends AppCompatActivity {
         final String orderID = getIntent().getStringExtra("orderId");
         MyLog.i("getOrderDetailData -->orderId  " + orderID);
         String url = ConstKey.GRJSDD_DETAIL_ADDRESS + ParamsBuilder.getParams();
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-
-                        MyLog.i("getOrderDetailData response" + response);
-                        String retContent = ParseReturnUtil.parseRetrun(response, PayTaxesSeven.this);
-                        if (TextUtils.isEmpty(retContent)) {
-                            return;
-                        }
+        Request<String> request = NoHttp.createStringRequest(url,RequestMethod.POST);
+        HashMap<String, String> map = new HashMap<>();
+        map.put("DDID", orderID);
+        String content = Base64.encodeToString(ParamsBuilder.hashMapToJson(map).getBytes(), Base64.DEFAULT);
+        map.clear();
+        MyLog.i(content);
+        map.put("content", content);
+        request.add(map);
+        CallServer.getRequestInstance().add(this, 0, request, new HttpListener<String>() {
+            @Override
+            public void onSucceed(int what, Response<String> response) {
+                MyLog.i("getOrderDetailData response" + response);
+                String retContent = ParseReturnUtil.parseRetrun(response.get(), PayTaxesSeven.this);
+                if (TextUtils.isEmpty(retContent)) {
+                    return;
+                }
                             /*JSONObject object=new JSONObject(retContent);
                             MyLog.e(retContent);
                             String orderDeatil=object.getJSONArray("DDLB").get(0).toString();*/
-                        mOrderDetail = GsonTools.parserJsonToArrayBean(retContent, PaytaxOrderDetail.class);
-                        showOrderDetail();
-                    }
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
+                mOrderDetail = GsonTools.parserJsonToArrayBean(retContent, PaytaxOrderDetail.class);
+                showOrderDetail();
             }
-        }) {
+
             @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                HashMap<String, String> map = new HashMap<>();
-                map.put("DDID", orderID);
-                String content = Base64.encodeToString(ParamsBuilder.hashMapToJson(map).getBytes(), Base64.DEFAULT);
-                map.clear();
-                MyLog.i(content);
-                map.put("content", content);
-                return map;
+            public void onFailed(int what, String url, Object tag, String error, int resCode, long ms) {
+
             }
-        };
-        // 把这个请求加入请求队列
-        TApplication.app.addToRequestQueue(stringRequest);
+        },false,false);
     }
 
     /**

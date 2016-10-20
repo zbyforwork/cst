@@ -15,24 +15,24 @@ import com.jp.wheelview.WheelView;
 
 import java.util.ArrayList;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class PayTaxesSix extends AppCompatActivity {
 
-    @Bind(R.id.iv_back)
+    @BindView(R.id.iv_back)
     ImageView mIvBack;
-    @Bind(R.id.et_location)
+    @BindView(R.id.et_location)
     EditText mEtLocation;
-    @Bind(R.id.tv_idcard)
+    @BindView(R.id.tv_idcard)
     EditText mTvIdcard;
-    @Bind(R.id.tv_address)
+    @BindView(R.id.tv_address)
     EditText mTvAddress;
-    @Bind(R.id.tv_tel)
+    @BindView(R.id.tv_tel)
     EditText mTvTel;
-    @Bind(R.id.bt_appointment)
+    @BindView(R.id.bt_appointment)
     Button mBtAppointment;
-    @Bind(R.id.bt_pay_taxes)
+    @BindView(R.id.bt_pay_taxes)
     Button mBtPayTaxes;
     private LayoutInflater mLayoutInflater;
 

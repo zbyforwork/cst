@@ -1,49 +1,41 @@
 package com.hxkj.cst.cheshuotong.activity;
 
 import android.app.Activity;
-import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.ListView;
 
-import com.android.volley.AuthFailureError;
-import com.android.volley.Request;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
-import com.google.zxing.WriterException;
 import com.hxkj.cst.cheshuotong.R;
 import com.hxkj.cst.cheshuotong.TApplication;
 import com.hxkj.cst.cheshuotong.adapter.YYXXAdapter;
-import com.hxkj.cst.cheshuotong.bean.JSXX;
 import com.hxkj.cst.cheshuotong.bean.YYXX;
 import com.hxkj.cst.cheshuotong.utils.Base64;
 import com.hxkj.cst.cheshuotong.utils.ConstKey;
-import com.hxkj.cst.cheshuotong.utils.DensityUtils;
 import com.hxkj.cst.cheshuotong.utils.GsonTools;
 import com.hxkj.cst.cheshuotong.utils.MyLog;
 import com.hxkj.cst.cheshuotong.utils.ParamsBuilder;
 import com.hxkj.cst.cheshuotong.utils.ParseReturnUtil;
-import com.hxkj.cst.cheshuotong.utils.QRGenerate;
 import com.marshalchen.ultimaterecyclerview.UltimateRecyclerView;
 import com.marshalchen.ultimaterecyclerview.divideritemdecoration.HorizontalDividerItemDecoration;
+import com.nohttp.CallServer;
+import com.nohttp.HttpListener;
+import com.yolanda.nohttp.NoHttp;
+import com.yolanda.nohttp.RequestMethod;
+import com.yolanda.nohttp.rest.Request;
+import com.yolanda.nohttp.rest.Response;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
-import cn.hugo.android.scanner.CaptureActivity;
 
 public class AppointmentActivity extends Activity {
 
-    @Bind(R.id.iv_back)
+    @BindView(R.id.iv_back)
     ImageView mIvBack;
-    @Bind(R.id.lv_swjg)
+    @BindView(R.id.lv_swjg)
     UltimateRecyclerView mLvSwjg;
     private ArrayList<YYXX> mYYXXList;
 
@@ -90,40 +82,35 @@ public class AppointmentActivity extends Activity {
      */
     private void getData() {
         String url = ConstKey.CLYYJS_ADDRESS + ParamsBuilder.getParams();
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        MyLog.i(response);
-                        final String retContent = ParseReturnUtil.parseRetrun(response, AppointmentActivity.this);
-                        if (retContent == null || retContent.equals("{}")) {
-                            return;
-                        }
-                        mYYXXList = (ArrayList<YYXX>) GsonTools.parserJsonToArrayBeans(retContent, "SWJGXX", YYXX.class);
-                        showYYXX();
-                    }
+        CallServer callServer = CallServer.getRequestInstance();
+        Request<String> request = NoHttp.createStringRequest(url, RequestMethod.POST);
+        HashMap<String, String> map = new HashMap<>();
+        map.put("CLJSDD", TApplication.app.mSelectXZQHDM);
+        map.put("CLLBID", TApplication.app.mCLLBID);
+        map.put("CLJSSBID", TApplication.app.mCLJSSBID);
+        String content = Base64.encodeToString(ParamsBuilder.hashMapToJson(map).getBytes(), Base64.DEFAULT);
+        map.clear();
+        MyLog.i(content);
+        map.put("content", content);
+        request.add(map);
+        callServer.add(this, 0, request, new HttpListener<String>() {
+            @Override
+            public void onSucceed(int what, Response<String> response) {
+                MyLog.i(response.get());
+                final String retContent = ParseReturnUtil.parseRetrun(response.get(), AppointmentActivity.this);
+                if (retContent == null || retContent.equals("{}")) {
+                    return;
                 }
-                , new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
+                mYYXXList = (ArrayList<YYXX>) GsonTools.parserJsonToArrayBeans(retContent, "SWJGXX", YYXX.class);
+                showYYXX();
             }
-        }
-        ) {
+
             @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                HashMap<String, String> map = new HashMap<>();
-                map.put("CLJSDD", TApplication.app.mSelectXZQHDM);
-                map.put("CLLBID", TApplication.app.mCLLBID);
-                map.put("CLJSSBID", TApplication.app.mCLJSSBID);
-                String content = Base64.encodeToString(ParamsBuilder.hashMapToJson(map).getBytes(), Base64.DEFAULT);
-                map.clear();
-                MyLog.i(content);
-                map.put("content", content);
-                return map;
+            public void onFailed(int what, String url, Object tag, String error, int resCode, long ms) {
+
             }
-        };
-        // 把这个请求加入请求队列
-        TApplication.app.addToRequestQueue(stringRequest);
+        },false,false);
+
     }
 
     private void showYYXX() {

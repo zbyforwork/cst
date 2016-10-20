@@ -4,7 +4,7 @@ import android.content.Context;
 import android.net.Uri;
 import android.view.View;
 
-import com.bigkoo.convenientbanner.CBPageAdapter;
+import com.bigkoo.convenientbanner.holder.Holder;
 import com.facebook.drawee.drawable.ScalingUtils;
 import com.facebook.drawee.view.SimpleDraweeView;
 
@@ -13,7 +13,7 @@ import java.util.List;
 /**
  * Created by 刘杨 on 2015/8/26.
  */
-public class NetworkImageHolderView implements CBPageAdapter.Holder<String> {
+public class NetworkImageHolderView implements Holder<String> {
 	private SimpleDraweeView imageView;
 
 	List<String> mImageSources;

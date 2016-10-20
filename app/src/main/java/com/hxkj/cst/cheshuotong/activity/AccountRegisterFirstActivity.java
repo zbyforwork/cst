@@ -11,7 +11,7 @@ import android.widget.TextView;
 import com.hxkj.cst.cheshuotong.R;
 import com.hxkj.cst.cheshuotong.utils.ExceptionUtil;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class AccountRegisterFirstActivity extends AppCompatActivity implements View.OnClickListener {
@@ -20,22 +20,22 @@ public class AccountRegisterFirstActivity extends AppCompatActivity implements V
     /**
      * 返回
      */
-    @Bind(R.id.iv_back)
+    @BindView(R.id.iv_back)
     ImageView ivBack;
     /**
      * 扫描二维码输入
      */
-    @Bind(R.id.rel_erweima)
+    @BindView(R.id.rel_erweima)
     RelativeLayout relErweima;
     /**
      * 手动输入
      */
-    @Bind(R.id.rel_byhand)
+    @BindView(R.id.rel_byhand)
     RelativeLayout relByhand;
     /**
      * 扫描解析申报表二维码进行注册
      */
-    @Bind(R.id.registerAnother)
+    @BindView(R.id.registerAnother)
     TextView registerAnother;
 
     @Override

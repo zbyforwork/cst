@@ -14,16 +14,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.android.volley.AuthFailureError;
-import com.android.volley.Request;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
-import com.hxkj.cst.cheshuotong.MainActivity;
 import com.hxkj.cst.cheshuotong.R;
 import com.hxkj.cst.cheshuotong.TApplication;
 import com.hxkj.cst.cheshuotong.bean.User;
-import com.hxkj.cst.cheshuotong.bean.YYXX;
 import com.hxkj.cst.cheshuotong.utils.Base64;
 import com.hxkj.cst.cheshuotong.utils.ConstKey;
 import com.hxkj.cst.cheshuotong.utils.GsonTools;
@@ -32,14 +25,18 @@ import com.hxkj.cst.cheshuotong.utils.MyToast;
 import com.hxkj.cst.cheshuotong.utils.ParamsBuilder;
 import com.hxkj.cst.cheshuotong.utils.ParseReturnUtil;
 import com.hxkj.cst.cheshuotong.utils.PreferenceUtils;
+import com.nohttp.CallServer;
+import com.nohttp.HttpListener;
+import com.yolanda.nohttp.NoHttp;
+import com.yolanda.nohttp.RequestMethod;
+import com.yolanda.nohttp.rest.Request;
+import com.yolanda.nohttp.rest.Response;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class AccountloginActivity extends Activity implements TextWatcher, View.OnClickListener {
@@ -47,34 +44,34 @@ public class AccountloginActivity extends Activity implements TextWatcher, View.
     /**
      * 返回
      */
-    @Bind(R.id.iv_back)
+    @BindView(R.id.iv_back)
     ImageView ivBack;
 
     /**
      * 输入电话号码
      */
-    @Bind(R.id.et_number)
+    @BindView(R.id.et_number)
     EditText etNumber;
 
     /**
      * 输入密码
      */
-    @Bind(R.id.et_password)
+    @BindView(R.id.et_password)
     EditText etPassword;
     /**
      * 登录
      */
-    @Bind(R.id.bt_login)
+    @BindView(R.id.bt_login)
     Button btLogin;
     /**
      * 注册
      */
-    @Bind(R.id.tv_register)
+    @BindView(R.id.tv_register)
     TextView tvRegister;
     /**
      * 找回密码
      */
-    @Bind(R.id.tv_getmssingcode)
+    @BindView(R.id.tv_getmssingcode)
     TextView tvGetmssingcode;
 
     // 输入软键盘管理者
@@ -160,46 +157,40 @@ public class AccountloginActivity extends Activity implements TextWatcher, View.
      */
     private void login(final String phone, final String password) {
         String url = ConstKey.LOGIN + ParamsBuilder.getParams();
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        MyLog.i(response);
-                        final String retContent = ParseReturnUtil.parseRetrun(response, AccountloginActivity.this);
-                        if (retContent == null) {
-                            return;
-                        } else {
-                            User user = GsonTools.parserJsonToArrayBean(retContent, User.class);
-                            PreferenceUtils.setPrefString(TApplication.app, "UserID", user.getID());
-                            PreferenceUtils.setPrefString(TApplication.app, "UserPhone", user.getPHONE());
-                            PreferenceUtils.setPrefString(TApplication.app, "UserPassword", user.getPASSWORD());
-                            TApplication.app.mUserId = user.getID();
-                            MyToast.show(AccountloginActivity.this, "登录成功");
-                            finish();
-                        }
-                    }
+        CallServer callServer = CallServer.getRequestInstance();
+        Request<String> request = NoHttp.createStringRequest(url, RequestMethod.POST);
+        HashMap<String, String> map = new HashMap<>();
+        map.put("phone", phone);
+        map.put("mtype", "android");
+        map.put("password", password);
+        String content = Base64.encodeToString(ParamsBuilder.hashMapToJson(map).getBytes(), Base64.DEFAULT);
+        map.clear();
+        MyLog.i("content:-->" + content);
+        map.put("content", content);
+        request.add(map);
+        callServer.add(this, 0, request, new HttpListener<String>() {
+            @Override
+            public void onSucceed(int what, Response<String> response) {
+                MyLog.i(response.get());
+                final String retContent = ParseReturnUtil.parseRetrun(response.get(), AccountloginActivity.this);
+                if (retContent == null) {
+                    return;
+                } else {
+                    User user = GsonTools.parserJsonToArrayBean(retContent, User.class);
+                    PreferenceUtils.setPrefString(TApplication.app, "UserID", user.getID());
+                    PreferenceUtils.setPrefString(TApplication.app, "UserPhone", user.getPHONE());
+                    PreferenceUtils.setPrefString(TApplication.app, "UserPassword", user.getPASSWORD());
+                    TApplication.app.mUserId = user.getID();
+                    MyToast.show(AccountloginActivity.this, "登录成功");
+                    finish();
                 }
-                , new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
             }
-        }
-        ) {
+
             @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                HashMap<String, String> map = new HashMap<>();
-                map.put("phone", phone);
-                map.put("mtype", "android");
-                map.put("password", password);
-                String content = Base64.encodeToString(ParamsBuilder.hashMapToJson(map).getBytes(), Base64.DEFAULT);
-                map.clear();
-                MyLog.i("content:-->" + content);
-                map.put("content", content);
-                return map;
+            public void onFailed(int what, String url, Object tag, String error, int resCode, long ms) {
+
             }
-        };
-        // 把这个请求加入请求队列
-        TApplication.app.addToRequestQueue(stringRequest);
+        }, false, false);
     }
 
     @Override
@@ -227,7 +218,7 @@ public class AccountloginActivity extends Activity implements TextWatcher, View.
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 101 && resultCode == RESULT_OK) {
-           finish();
+            finish();
         }
     }
 }

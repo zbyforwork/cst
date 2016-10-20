@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="@color/appColor">
+
+        <TextView
+            android:id="@+id/map_back"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:layout_marginStart="10dp"
+            android:background="@drawable/back"/>
+
+
+        <TextView
+            android:id="@+id/map_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_gravity="center"
+            android:text="@string/map_title"
+            android:textColor="@color/bg_White"
+            android:textSize="@dimen/title_font_size"/>
+
+    </RelativeLayout>
+
+    <RadioGroup
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:gravity="center"
+        android:background="@color/white"
+        android:orientation="horizontal">
+
+        <RadioButton
+            style="@style/map_nav"
+            android:text="@string/map_nav_jyz"/>
+
+        <RadioButton
+            style="@style/map_nav"
+            android:text="@string/map_nav_tcc"/>
+
+        <RadioButton
+            style="@style/map_nav"
+            android:text="@string/map_nav_4s"/>
+
+        <RadioButton
+            style="@style/map_nav"
+            android:text="@string/map_nav_xc"/>
+
+    </RadioGroup>
+
+    <com.baidu.mapapi.map.MapView
+        android:id="@+id/map_contain"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clickable="true"
+        />
+
+</LinearLayout>

@@ -1,18 +1,14 @@
 package com.hxkj.cst.cheshuotong.activity;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Handler;
 import android.os.Message;
-import android.support.annotation.MainThread;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.KeyEvent;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -22,77 +18,69 @@ import android.widget.TextView;
 
 import com.afollestad.materialdialogs.GravityEnum;
 import com.afollestad.materialdialogs.MaterialDialog;
-import com.android.volley.AuthFailureError;
-import com.android.volley.Request;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
 import com.hxkj.cst.cheshuotong.R;
 import com.hxkj.cst.cheshuotong.TApplication;
 import com.hxkj.cst.cheshuotong.bean.User;
-import com.hxkj.cst.cheshuotong.bean.XZQH;
 import com.hxkj.cst.cheshuotong.utils.Base64;
 import com.hxkj.cst.cheshuotong.utils.ConstKey;
 import com.hxkj.cst.cheshuotong.utils.GsonTools;
 import com.hxkj.cst.cheshuotong.utils.MyLog;
-import com.hxkj.cst.cheshuotong.utils.MyToast;
 import com.hxkj.cst.cheshuotong.utils.ParamsBuilder;
 import com.hxkj.cst.cheshuotong.utils.ParseReturnUtil;
 import com.hxkj.cst.cheshuotong.utils.PreferenceUtils;
-import com.mobsandgeeks.saripaar.Rule;
 import com.mobsandgeeks.saripaar.Validator;
-import com.mobsandgeeks.saripaar.annotation.AssertTrue;
-import com.mobsandgeeks.saripaar.annotation.Digits;
-import com.mobsandgeeks.saripaar.annotation.Email;
-import com.mobsandgeeks.saripaar.annotation.Min;
-import com.mobsandgeeks.saripaar.annotation.Password;
-import com.mobsandgeeks.saripaar.annotation.ValidateUsing;
-import com.mobsandgeeks.saripaar.rule.MinRule;
+import com.nohttp.CallServer;
+import com.nohttp.HttpListener;
+import com.yolanda.nohttp.NoHttp;
+import com.yolanda.nohttp.RequestMethod;
+import com.yolanda.nohttp.rest.Request;
+import com.yolanda.nohttp.rest.Response;
 
 import java.util.HashMap;
-import java.util.Map;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class AccountRegisterActivity extends Activity implements TextWatcher, View.OnClickListener {
 
-    @Bind(R.id.iv_back)
+    @BindView(R.id.iv_back)
     ImageView ivBack;
-    @Bind(R.id.tv_phoneNumber)
+    @BindView(R.id.tv_phoneNumber)
     TextView tvPhoneNumber;
-    @Bind(R.id.et_number)
+    @BindView(R.id.et_number)
     EditText etNumber;
-    @Bind(R.id.rel_phone)
+    @BindView(R.id.rel_phone)
     RelativeLayout relPhone;
-    @Bind(R.id.tv_password)
+    @BindView(R.id.tv_password)
     TextView tvPassword;
-    @Bind(R.id.et_password)
+    @BindView(R.id.et_password)
     EditText etPassword;
-    @Bind(R.id.rel_password)
+    @BindView(R.id.rel_password)
     RelativeLayout relPassword;
-    @Bind(R.id.tv_yanzhengma)
+    @BindView(R.id.tv_yanzhengma)
     TextView tvYanzhengma;
-    @Bind(R.id.et_yanzhengmaEdit)
+    @BindView(R.id.et_yanzhengmaEdit)
     EditText etYanzhengmaEdit;
-    @Bind(R.id.bt_getcode)
+    @BindView(R.id.bt_getcode)
     Button btGetcode;
-    @Bind(R.id.rel_yanzhengma)
+    @BindView(R.id.rel_yanzhengma)
     RelativeLayout relYanzhengma;
-    @Bind(R.id.tv_mail)
+    @BindView(R.id.tv_mail)
     TextView tvMail;
-    @Bind(R.id.et_mail)
+    @BindView(R.id.et_mail)
     EditText etMail;
-    @Bind(R.id.view6)
+    @BindView(R.id.view6)
     View view6;
-    @Bind(R.id.rel_mail)
+    @BindView(R.id.rel_mail)
     RelativeLayout relMail;
-    @Bind(R.id.relative)
+    @BindView(R.id.relative)
     RelativeLayout relative;
-    @Bind(R.id.bt_register)
+    @BindView(R.id.bt_register)
     Button btRegister;
     Validator validator = new Validator(this);
     private TimeCount timer;
+
+    private CallServer mCallServer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -112,6 +100,8 @@ public class AccountRegisterActivity extends Activity implements TextWatcher, Vi
         btGetcode.setOnClickListener(this);
         ivBack.setOnClickListener(this);
         timer= new TimeCount(60 * 1000, 1000);//构造CountDownTimer对象
+
+        mCallServer = CallServer.getRequestInstance();
     }
 
     @Override
@@ -189,41 +179,34 @@ public class AccountRegisterActivity extends Activity implements TextWatcher, Vi
         timer.start();
         btGetcode.setClickable(false);
         btGetcode.setBackgroundResource(R.drawable.buttongrey);
+
         String url = ConstKey.GET_CODE + ParamsBuilder.getParams();
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        MyLog.i(response);
-                        final String retContent = ParseReturnUtil.parseRetrun(response, AccountRegisterActivity.this);
-                        if (retContent == null) {
-                            btGetcode.setClickable(true);
-                            btGetcode.setText("获取验证码");
-                            btGetcode.setBackgroundResource(R.drawable.buttonblue);
-                            timer.cancel();
-                            return;
-                        }
-                    }
+        Request<String> request = NoHttp.createStringRequest(url, RequestMethod.POST);
+        HashMap<String, String> map = new HashMap<>();
+        map.put("phone", phone);
+        String content = Base64.encodeToString(ParamsBuilder.hashMapToJson(map).getBytes(), Base64.DEFAULT);
+        map.clear();
+        MyLog.i("content:-->" + content);
+        map.put("content", content);
+        request.add(map);
+        mCallServer.add(this, 0, request, new HttpListener<String>() {
+            @Override
+            public void onSucceed(int what, Response<String> response) {
+                MyLog.i(response.get());
+                final String retContent = ParseReturnUtil.parseRetrun(response.get(), AccountRegisterActivity.this);
+                if (retContent == null) {
+                    btGetcode.setClickable(true);
+                    btGetcode.setText("获取验证码");
+                    btGetcode.setBackgroundResource(R.drawable.buttonblue);
+                    timer.cancel();
                 }
-                , new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
             }
-        }
-        ) {
+
             @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                HashMap<String, String> map = new HashMap<>();
-                map.put("phone", phone);
-                String content = Base64.encodeToString(ParamsBuilder.hashMapToJson(map).getBytes(), Base64.DEFAULT);
-                map.clear();
-                MyLog.i("content:-->" + content);
-                map.put("content", content);
-                return map;
+            public void onFailed(int what, String url, Object tag, String error, int resCode, long ms) {
+
             }
-        };
-        // 把这个请求加入请求队列
-        TApplication.app.addToRequestQueue(stringRequest);
+        },false,false);
     }
 
     Handler handler = new Handler() {
@@ -245,48 +228,41 @@ public class AccountRegisterActivity extends Activity implements TextWatcher, Vi
         final String phone = etNumber.getText().toString().trim();
         final String password = etPassword.getText().toString().trim();
         final String code = etYanzhengmaEdit.getText().toString().trim();
+
         String url = ConstKey.REGISTER + ParamsBuilder.getParams();
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        MyLog.i(response);
-                        final String retContent = ParseReturnUtil.parseRetrun(response, AccountRegisterActivity.this);
-                        if (retContent == null) {
-                            return;
-                        }
-                        new MaterialDialog.Builder(AccountRegisterActivity.this)
-                                .title("你好")
-                                .content("正在为你自动登录")
-                                .progress(true, 0)
-                                .titleGravity(GravityEnum.CENTER)
-                                .contentGravity(GravityEnum.CENTER)
-                                .progressIndeterminateStyle(false)
-                                .show();
-                        login(phone, password);
-                    }
+        Request<String> request = NoHttp.createStringRequest(url,RequestMethod.POST);
+        HashMap<String, String> map = new HashMap<>();
+        map.put("phone", phone);
+        map.put("password", password);
+        map.put("code", code);
+        String content = Base64.encodeToString(ParamsBuilder.hashMapToJson(map).getBytes(), Base64.DEFAULT);
+        map.clear();
+        MyLog.i("content:-->" + content);
+        map.put("content", content);
+        mCallServer.add(this, 0, request, new HttpListener<String>() {
+            @Override
+            public void onSucceed(int what, Response<String> response) {
+                MyLog.i(response.get());
+                final String retContent = ParseReturnUtil.parseRetrun(response.get(), AccountRegisterActivity.this);
+                if (retContent == null) {
+                    return;
                 }
-                , new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
+                new MaterialDialog.Builder(AccountRegisterActivity.this)
+                        .title("你好")
+                        .content("正在为你自动登录")
+                        .progress(true, 0)
+                        .titleGravity(GravityEnum.CENTER)
+                        .contentGravity(GravityEnum.CENTER)
+                        .progressIndeterminateStyle(false)
+                        .show();
+                login(phone, password);
             }
-        }
-        ) {
+
             @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                HashMap<String, String> map = new HashMap<>();
-                map.put("phone", phone);
-                map.put("password", password);
-                map.put("code", code);
-                String content = Base64.encodeToString(ParamsBuilder.hashMapToJson(map).getBytes(), Base64.DEFAULT);
-                map.clear();
-                MyLog.i("content:-->" + content);
-                map.put("content", content);
-                return map;
+            public void onFailed(int what, String url, Object tag, String error, int resCode, long ms) {
+
             }
-        };
-        // 把这个请求加入请求队列
-        TApplication.app.addToRequestQueue(stringRequest);
+        },false,false);
     }
 
     /**
@@ -297,47 +273,40 @@ public class AccountRegisterActivity extends Activity implements TextWatcher, Vi
      */
     private void login(final String phone, final String password) {
         String url = ConstKey.LOGIN + ParamsBuilder.getParams();
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        MyLog.i(response);
-                        final String retContent = ParseReturnUtil.parseRetrun(response, AccountRegisterActivity.this);
-                        if (retContent == null) {
-                            return;
-                        } else {
-                            User user = GsonTools.parserJsonToArrayBean(retContent, User.class);
-                            PreferenceUtils.setPrefString(TApplication.app, "UserID", user.getID());
-                            PreferenceUtils.setPrefString(TApplication.app, "UserPhone", user.getPHONE());
-                            PreferenceUtils.setPrefString(TApplication.app, "UserPassword", user.getPASSWORD());
-                            TApplication.app.mUserId = user.getID();
-                            Message msg = new Message();
-                            msg.what = 1;
-                            handler.sendMessageDelayed(msg, 2000);
-                        }
-                    }
+        Request<String> request = NoHttp.createStringRequest(url,RequestMethod.POST);
+        HashMap<String, String> map = new HashMap<>();
+        map.put("phone", phone);
+        map.put("mtype", "android");
+        map.put("password", password);
+        String content = Base64.encodeToString(ParamsBuilder.hashMapToJson(map).getBytes(), Base64.DEFAULT);
+        map.clear();
+        MyLog.i("content:-->" + content);
+        map.put("content", content);
+        request.add(map);
+        mCallServer.add(this, 0, request, new HttpListener<String>() {
+            @Override
+            public void onSucceed(int what, Response<String> response) {
+                MyLog.i(response.get());
+                final String retContent = ParseReturnUtil.parseRetrun(response.get(), AccountRegisterActivity.this);
+                if (retContent == null) {
+                    return;
+                } else {
+                    User user = GsonTools.parserJsonToArrayBean(retContent, User.class);
+                    PreferenceUtils.setPrefString(TApplication.app, "UserID", user.getID());
+                    PreferenceUtils.setPrefString(TApplication.app, "UserPhone", user.getPHONE());
+                    PreferenceUtils.setPrefString(TApplication.app, "UserPassword", user.getPASSWORD());
+                    TApplication.app.mUserId = user.getID();
+                    Message msg = new Message();
+                    msg.what = 1;
+                    handler.sendMessageDelayed(msg, 2000);
                 }
-                , new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
             }
-        }
-        ) {
+
             @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                HashMap<String, String> map = new HashMap<>();
-                map.put("phone", phone);
-                map.put("mtype", "android");
-                map.put("password", password);
-                String content = Base64.encodeToString(ParamsBuilder.hashMapToJson(map).getBytes(), Base64.DEFAULT);
-                map.clear();
-                MyLog.i("content:-->" + content);
-                map.put("content", content);
-                return map;
+            public void onFailed(int what, String url, Object tag, String error, int resCode, long ms) {
+
             }
-        };
-        // 把这个请求加入请求队列
-        TApplication.app.addToRequestQueue(stringRequest);
+        },false,false);
     }
     public boolean onKeyDown(int keyCode, KeyEvent event) {
 

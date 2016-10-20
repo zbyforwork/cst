@@ -1,23 +1,13 @@
 package com.hxkj.cst.cheshuotong.activity;
-import java.text.DecimalFormat;
-
-import com.android.volley.RequestQueue;
-import com.android.volley.toolbox.ImageLoader;
-import com.android.volley.toolbox.Volley;
-import com.android.volley.toolbox.ImageLoader.ImageListener;
-import com.hxkj.cst.cheshuotong.R;
-import com.hxkj.cst.cheshuotong.utils.BitmapCache;
-import com.hxkj.cst.cheshuotong.widget.TouchImageView;
-
-
 import android.app.Activity;
-import android.graphics.PointF;
-import android.graphics.RectF;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.TextView;
-import android.widget.Toast;
+
+import com.hxkj.cst.cheshuotong.R;
+import com.hxkj.cst.cheshuotong.widget.TouchImageView;
+
+import java.text.DecimalFormat;
 
 
 
@@ -26,7 +16,6 @@ public class SingleTouchImageViewActivity extends Activity {
 	
 	private TouchImageView image;
 	private DecimalFormat df;
-	private  RequestQueue mQueue;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -35,9 +24,6 @@ public class SingleTouchImageViewActivity extends Activity {
 		//
 		// DecimalFormat rounds to 2 decimal places.
 		//
-		mQueue = Volley.newRequestQueue(this);	
-		
-	
 		
 		image = (TouchImageView) findViewById(R.id.img);
 		String src=getIntent().getExtras().getString("src");

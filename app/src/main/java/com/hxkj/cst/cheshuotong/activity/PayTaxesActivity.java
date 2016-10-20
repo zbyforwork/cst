@@ -1,62 +1,48 @@
 package com.hxkj.cst.cheshuotong.activity;
 
 import android.app.Activity;
-import android.app.Dialog;
-import android.content.BroadcastReceiver;
-import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
-import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.view.Display;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.android.volley.AuthFailureError;
-import com.android.volley.Request;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
 import com.hxkj.cst.cheshuotong.R;
 import com.hxkj.cst.cheshuotong.TApplication;
-import com.hxkj.cst.cheshuotong.bean.User;
 import com.hxkj.cst.cheshuotong.bean.XZQH;
-import com.hxkj.cst.cheshuotong.utils.Base64;
 import com.hxkj.cst.cheshuotong.utils.ConstKey;
-import com.hxkj.cst.cheshuotong.utils.ExceptionUtil;
 import com.hxkj.cst.cheshuotong.utils.GsonTools;
 import com.hxkj.cst.cheshuotong.utils.MyLog;
 import com.hxkj.cst.cheshuotong.utils.ParamsBuilder;
 import com.hxkj.cst.cheshuotong.utils.ParseReturnUtil;
-import com.hxkj.cst.cheshuotong.utils.PreferenceUtils;
 import com.jp.wheelview.WheelView;
+import com.nohttp.CallServer;
+import com.nohttp.HttpListener;
+import com.yolanda.nohttp.NoHttp;
+import com.yolanda.nohttp.RequestMethod;
+import com.yolanda.nohttp.rest.Request;
+import com.yolanda.nohttp.rest.Response;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import cn.hugo.android.scanner.CaptureActivity;
 
 public class PayTaxesActivity extends Activity {
 
-    @Bind(R.id.tv_place)
+    @BindView(R.id.tv_place)
     TextView mTvPlace;
-    @Bind(R.id.bt_next)
+    @BindView(R.id.bt_next)
     Button mBtNext;
-    @Bind(R.id.mv_province)
+    @BindView(R.id.mv_province)
     WheelView mMvProvince;
-    @Bind(R.id.mv_city)
+    @BindView(R.id.mv_city)
     WheelView mMvCity;
-    @Bind(R.id.iv_back)
+    @BindView(R.id.iv_back)
     ImageView mIvBack;
     private ArrayList<XZQH> xzqhArrayList;
     private String mXZQHDM;
@@ -77,30 +63,27 @@ public class PayTaxesActivity extends Activity {
 
     private void getData() {
         String url = ConstKey.GET_XZQHLB_ADDRESS + ParamsBuilder.getParams();
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        MyLog.i(response);
-                        final String retContent = ParseReturnUtil.parseRetrun(response, PayTaxesActivity.this);
-                        if (retContent == null) {
-                            return;
-                        } else {
-                            MyLog.i(retContent);
-                            xzqhArrayList = (ArrayList<XZQH>) GsonTools.parserJsonToArrayBeans(retContent, "XZQHLB", XZQH.class);
-                            init();
-                            setListener();
-                        }
-                    }
-                }
-                , new Response.ErrorListener() {
+        Request<String> request = NoHttp.createStringRequest(url, RequestMethod.POST);
+        CallServer.getRequestInstance().add(this, 0, request, new HttpListener<String>() {
             @Override
-            public void onErrorResponse(VolleyError error) {
+            public void onSucceed(int what, Response<String> response) {
+                MyLog.i(response.get());
+                final String retContent = ParseReturnUtil.parseRetrun(response.get(), PayTaxesActivity.this);
+                if (retContent == null) {
+                    return;
+                } else {
+                    MyLog.i(retContent);
+                    xzqhArrayList = (ArrayList<XZQH>) GsonTools.parserJsonToArrayBeans(retContent, "XZQHLB", XZQH.class);
+                    init();
+                    setListener();
+                }
             }
-        });
-        // 把这个请求加入请求队列
-        TApplication.app.addToRequestQueue(stringRequest);
 
+            @Override
+            public void onFailed(int what, String url, Object tag, String error, int resCode, long ms) {
+
+            }
+        },false,false);
     }
 
     private void init() {

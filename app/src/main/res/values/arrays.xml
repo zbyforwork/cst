@@ -47,4 +47,11 @@
         <item>~夏先生</item>
     </string-array>
 
+    <integer-array name="convenientBannerDataSource">
+        <item>@mipmap/banner1</item>
+        <item>@mipmap/banner2</item>
+        <item>@mipmap/banner3</item>
+        <item>@mipmap/banner4</item>
+    </integer-array>
+
 </resources>

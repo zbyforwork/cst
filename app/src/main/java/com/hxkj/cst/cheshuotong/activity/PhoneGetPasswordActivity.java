@@ -13,7 +13,7 @@ import android.widget.TextView;
 import com.hxkj.cst.cheshuotong.R;
 import com.hxkj.cst.cheshuotong.utils.ExceptionUtil;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class PhoneGetPasswordActivity extends AppCompatActivity implements View.OnClickListener{
@@ -21,36 +21,36 @@ public class PhoneGetPasswordActivity extends AppCompatActivity implements View.
     /**
      * 返回
      */
-    @Bind(R.id.iv_back)
+    @BindView(R.id.iv_back)
     ImageView ivBack;
-    @Bind(R.id.tv_phoneNumber)
+    @BindView(R.id.tv_phoneNumber)
     TextView tvPhoneNumber;
-    @Bind(R.id.et_number)
+    @BindView(R.id.et_number)
     EditText etNumber;
-    @Bind(R.id.rel_phone)
+    @BindView(R.id.rel_phone)
     RelativeLayout relPhone;
-    @Bind(R.id.tv_yanzhengma)
+    @BindView(R.id.tv_yanzhengma)
     TextView tvYanzhengma;
     /**
      * 输入验证码
      */
-    @Bind(R.id.et_yanzhengmaEdit)
+    @BindView(R.id.et_yanzhengmaEdit)
     EditText etYanzhengmaEdit;
     /**
      * 获取验证码
      */
-    @Bind(R.id.bt_getcode)
+    @BindView(R.id.bt_getcode)
     Button btGetcode;
-    @Bind(R.id.rel_yanzhengma)
+    @BindView(R.id.rel_yanzhengma)
     RelativeLayout relYanzhengma;
-    @Bind(R.id.relative)
+    @BindView(R.id.relative)
     RelativeLayout relative;
-    @Bind(R.id.relativeLayout)
+    @BindView(R.id.relativeLayout)
     RelativeLayout relativeLayout;
     /**
      * 跳转到新密码设置
      */
-    @Bind(R.id.bt_next)
+    @BindView(R.id.bt_next)
     Button btNext;
 
     @Override

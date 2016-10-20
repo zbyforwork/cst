@@ -13,7 +13,7 @@ import android.widget.TextView;
 import com.hxkj.cst.cheshuotong.R;
 import com.hxkj.cst.cheshuotong.utils.ExceptionUtil;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class MaillGetPasswordActivity extends Activity implements View.OnClickListener {
@@ -21,24 +21,24 @@ public class MaillGetPasswordActivity extends Activity implements View.OnClickLi
     /**
      * 返回
      */
-    @Bind(R.id.iv_Mailback)
+    @BindView(R.id.iv_Mailback)
     ImageView ivMailback;
-    @Bind(R.id.et_mail)
+    @BindView(R.id.et_mail)
     EditText etMail;
-    @Bind(R.id.rel_mail)
+    @BindView(R.id.rel_mail)
     RelativeLayout relMail;
-    @Bind(R.id.tv_yanzhengma)
+    @BindView(R.id.tv_yanzhengma)
     TextView tvYanzhengma;
-    @Bind(R.id.et_yanzhengma)
+    @BindView(R.id.et_yanzhengma)
     EditText etYanzhengma;
-    @Bind(R.id.bt_getcode)
+    @BindView(R.id.bt_getcode)
     Button btGetcode;
-    @Bind(R.id.rel_yanzhengma)
+    @BindView(R.id.rel_yanzhengma)
     RelativeLayout relYanzhengma;
     /**
      * 下一步到新密码的设置
      */
-    @Bind(R.id.bt_login)
+    @BindView(R.id.bt_login)
     Button btLogin;
 
     @Override

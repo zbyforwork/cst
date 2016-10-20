@@ -1,7 +1,5 @@
 package com.hxkj.cst.cheshuotong.activity;
 
-import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -11,25 +9,14 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.TextView;
-import android.widget.Toast;
 
-import com.android.volley.AuthFailureError;
-import com.android.volley.Request;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
-import com.facebook.drawee.view.SimpleDraweeView;
 import com.hxkj.cst.cheshuotong.R;
 import com.hxkj.cst.cheshuotong.TApplication;
 import com.hxkj.cst.cheshuotong.adapter.CarTypeSortAdapter;
-import com.hxkj.cst.cheshuotong.adapter.CityAdapter;
 import com.hxkj.cst.cheshuotong.adapter.PPCLXXAdapter;
 import com.hxkj.cst.cheshuotong.bean.CLPP;
 import com.hxkj.cst.cheshuotong.bean.CLXX;
-import com.hxkj.cst.cheshuotong.bean.JSXX;
 import com.hxkj.cst.cheshuotong.bean.PPCLXX;
-import com.hxkj.cst.cheshuotong.bean.XZQH;
 import com.hxkj.cst.cheshuotong.utils.Base64;
 import com.hxkj.cst.cheshuotong.utils.CharacterParser;
 import com.hxkj.cst.cheshuotong.utils.ConstKey;
@@ -40,6 +27,12 @@ import com.hxkj.cst.cheshuotong.utils.ParseReturnUtil;
 import com.hxkj.cst.cheshuotong.utils.PinyinComparator;
 import com.hxkj.cst.cheshuotong.utils.SideBar;
 import com.marshalchen.ultimaterecyclerview.UltimateRecyclerView;
+import com.nohttp.CallServer;
+import com.nohttp.HttpListener;
+import com.yolanda.nohttp.NoHttp;
+import com.yolanda.nohttp.RequestMethod;
+import com.yolanda.nohttp.rest.Request;
+import com.yolanda.nohttp.rest.Response;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -49,18 +42,17 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class SelectCarTypeActivity extends AppCompatActivity {
 
-    @Bind(R.id.iv_back)
+    @BindView(R.id.iv_back)
     ImageView mIvBack;
-    @Bind(R.id.recycleview_clxx)
+    @BindView(R.id.recycleview_clxx)
     UltimateRecyclerView mRecycleviewClxx;
-    @Bind(R.id.drawer_layout)
+    @BindView(R.id.drawer_layout)
     public DrawerLayout mDrawerLayout;
     private ListView sortListView;
     private SideBar sideBar;
@@ -135,34 +127,31 @@ public class SelectCarTypeActivity extends AppCompatActivity {
     private void getData() {
         String url = ConstKey.GET_CLPPLB_ADDRESS + ParamsBuilder.getParams();
         MyLog.i(url);
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        MyLog.i(response);
-                        String retContent = ParseReturnUtil.parseRetrun(response, SelectCarTypeActivity.this);
-                        if (null == retContent) {
-                            return;
-                        }
-                        MyLog.i(retContent);
-                        try {
-                            JSONObject object = new JSONObject(retContent);
-                            JSONArray jsonArray = object.getJSONArray("CLPPLB");
-                            //TApplication.app.mCLJSSBID = object.getString("JSSBID");
-                            parseCLXX(jsonArray);
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-
-                    }
-                }, new Response.ErrorListener() {
+        Request<String> request = NoHttp.createStringRequest(url, RequestMethod.POST);
+        CallServer.getRequestInstance().add(this, 0, request, new HttpListener<String>() {
             @Override
-            public void onErrorResponse(VolleyError error) {
+            public void onSucceed(int what, Response<String> response) {
+                MyLog.i(response.get());
+                String retContent = ParseReturnUtil.parseRetrun(response.get(), SelectCarTypeActivity.this);
+                if (null == retContent) {
+                    return;
+                }
+                MyLog.i(retContent);
+                try {
+                    JSONObject object = new JSONObject(retContent);
+                    JSONArray jsonArray = object.getJSONArray("CLPPLB");
+                    //TApplication.app.mCLJSSBID = object.getString("JSSBID");
+                    parseCLXX(jsonArray);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
-        });
-        // 把这个请求加入请求队列
-        TApplication.app.addToRequestQueue(stringRequest);
 
+            @Override
+            public void onFailed(int what, String url, Object tag, String error, int resCode, long ms) {
+
+            }
+        },false,false);
     }
 
     private void parseCLXX(JSONArray jsonArray) throws JSONException {
@@ -209,40 +198,35 @@ public class SelectCarTypeActivity extends AppCompatActivity {
     public void ShowPPXX(final CLPP clpp){
         MyLog.i(clpp.toString());
         String url = ConstKey.GET_CLPPCLXX_ADDRESS + ParamsBuilder.getParams();
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        String retContent = ParseReturnUtil.parseRetrun(response, SelectCarTypeActivity.this);
-                        if (null == retContent) {
-                            return;
-                        }
-                        MyLog.i(retContent);
-                        ArrayList<PPCLXX> ppclxxes = (ArrayList<PPCLXX>) GsonTools.parserJsonToArrayBeans(retContent,"CLLB" ,PPCLXX.class);
-                        MyLog.i(ppclxxes.toString());
-                        PPCLXXAdapter adpater = new PPCLXXAdapter(SelectCarTypeActivity.this, ppclxxes);
-                        LinearLayoutManager lm=new LinearLayoutManager(SelectCarTypeActivity.this);
-                        mRecycleviewClxx.setLayoutManager(lm);
-                        mRecycleviewClxx.setAdapter(adpater);
-                        mDrawerLayout.openDrawer(Gravity.RIGHT);
-                    }
-                }, new Response.ErrorListener() {
+        Request<String> request = NoHttp.createStringRequest(url,RequestMethod.POST);
+        HashMap<String, String> map = new HashMap<>();
+        map.put("CLPPID",clpp.getPPID());
+        String content = Base64.encodeToString(ParamsBuilder.hashMapToJson(map).getBytes(), Base64.DEFAULT);
+        map.clear();
+        MyLog.i(content);
+        map.put("content",content);
+        request.add(map);
+        CallServer.getRequestInstance().add(this, 0, request, new HttpListener<String>() {
             @Override
-            public void onErrorResponse(VolleyError error) {
+            public void onSucceed(int what, Response<String> response) {
+                String retContent = ParseReturnUtil.parseRetrun(response.get(), SelectCarTypeActivity.this);
+                if (null == retContent) {
+                    return;
+                }
+                MyLog.i(retContent);
+                ArrayList<PPCLXX> ppclxxes = (ArrayList<PPCLXX>) GsonTools.parserJsonToArrayBeans(retContent,"CLLB" ,PPCLXX.class);
+                MyLog.i(ppclxxes.toString());
+                PPCLXXAdapter adpater = new PPCLXXAdapter(SelectCarTypeActivity.this, ppclxxes);
+                LinearLayoutManager lm=new LinearLayoutManager(SelectCarTypeActivity.this);
+                mRecycleviewClxx.setLayoutManager(lm);
+                mRecycleviewClxx.setAdapter(adpater);
+                mDrawerLayout.openDrawer(Gravity.RIGHT);
             }
-        }) {
+
             @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                HashMap<String, String> map = new HashMap<>();
-                map.put("CLPPID",clpp.getPPID());
-                String content = Base64.encodeToString(ParamsBuilder.hashMapToJson(map).getBytes(), Base64.DEFAULT);
-                map.clear();
-                MyLog.i(content);
-                map.put("content",content);
-                return map;
+            public void onFailed(int what, String url, Object tag, String error, int resCode, long ms) {
+
             }
-        };
-        // 把这个请求加入请求队列
-        TApplication.app.addToRequestQueue(stringRequest);
+        },false,false);
     }
 }

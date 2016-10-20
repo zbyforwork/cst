@@ -9,7 +9,7 @@ import android.widget.RelativeLayout;
 import com.hxkj.cst.cheshuotong.R;
 import com.leaking.slideswitch.SlideSwitch;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class PushSettingActivity extends Activity implements View.OnClickListener {
@@ -17,24 +17,24 @@ public class PushSettingActivity extends Activity implements View.OnClickListene
     /**
      * 返回
      */
-    @Bind(R.id.iv_back)
+    @BindView(R.id.iv_back)
     ImageView ivBack;
     /**
      * 新文章提醒
      */
-    @Bind(R.id.slide_newsremind)
+    @BindView(R.id.slide_newsremind)
     SlideSwitch slideNewsremind;
     /**
      * 新闻推送
      */
-    @Bind(R.id.slide_newspush)
+    @BindView(R.id.slide_newspush)
     SlideSwitch slideNewspush;
     /**
      * 限行推送
      */
-    @Bind(R.id.slide_limitpush)
+    @BindView(R.id.slide_limitpush)
     SlideSwitch slideLimitpush;
-    @Bind(R.id.rel_update)
+    @BindView(R.id.rel_update)
     RelativeLayout relUpdate;
 
     @Override

@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+                                    xmlns:app="http://schemas.android.com/apk/res-auto"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_margin="5dp"
+                                    android:orientation="vertical"
+                                    app:cardCornerRadius="5dp"
+                                    app:cardElevation="2dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/ihc_card_image"
+            style="@style/ihc_card_describe_image"
+            android:src="@mipmap/ic_launcher"/>
+
+        <TextView
+            android:id="@+id/ihc_card_nick"
+            style="@style/ihc_card_describe"
+            android:layout_marginTop="10dp"
+            android:text="@string/ihc_card_nick"/>
+
+        <TextView
+            android:id="@+id/ihc_nick"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="10dp"
+            android:layout_toEndOf="@+id/ihc_card_nick"
+            android:layout_toRightOf="@+id/ihc_card_nick"/>
+
+        <TextView
+            android:id="@+id/ihc_card_model"
+            style="@style/ihc_card_describe"
+            android:layout_centerVertical="true"
+            android:text="@string/ich_card_model"/>
+
+        <TextView
+            android:id="@+id/ihc_model"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="5dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="10dp"
+            android:layout_toEndOf="@+id/ihc_card_model"
+            android:layout_toRightOf="@+id/ihc_card_model"/>
+
+        <TextView
+            android:id="@+id/ihc_card_number"
+            style="@style/ihc_card_describe"
+            android:layout_alignBottom="@+id/ihc_card_image"
+            android:layout_marginBottom="10dp"
+            android:text="@string/ihc_card_number"/>
+
+        <TextView
+            android:id="@+id/ihc_number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/ihc_card_image"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginStart="5dp"
+            android:layout_toEndOf="@+id/ihc_card_number"
+            android:layout_toRightOf="@+id/ihc_card_number"/>
+
+    </RelativeLayout>
+
+</android.support.v7.widget.CardView>

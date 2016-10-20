@@ -1,7 +1,6 @@
 package com.hxkj.cst.cheshuotong.activity;
 
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -10,12 +9,6 @@ import android.widget.ImageView;
 
 import com.afollestad.materialdialogs.GravityEnum;
 import com.afollestad.materialdialogs.MaterialDialog;
-import com.android.volley.AuthFailureError;
-import com.android.volley.Request;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
 import com.hxkj.cst.cheshuotong.MainActivity;
 import com.hxkj.cst.cheshuotong.R;
 import com.hxkj.cst.cheshuotong.TApplication;
@@ -28,6 +21,12 @@ import com.hxkj.cst.cheshuotong.utils.MyToast;
 import com.hxkj.cst.cheshuotong.utils.ParamsBuilder;
 import com.hxkj.cst.cheshuotong.utils.ParseReturnUtil;
 import com.marshalchen.ultimaterecyclerview.UltimateRecyclerView;
+import com.nohttp.CallServer;
+import com.nohttp.HttpListener;
+import com.yolanda.nohttp.NoHttp;
+import com.yolanda.nohttp.RequestMethod;
+import com.yolanda.nohttp.rest.Request;
+import com.yolanda.nohttp.rest.Response;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -36,16 +35,15 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class ChooseUserCarTypeActivity extends AppCompatActivity {
 
-    @Bind(R.id.iv_back)
+    @BindView(R.id.iv_back)
     ImageView mIvBack;
-    @Bind(R.id.recycleview_carType)
+    @BindView(R.id.recycleview_carType)
     UltimateRecyclerView mRecyclerviewCarType;
 
     private List<CLXX> mSourceDateList;
@@ -55,7 +53,6 @@ public class ChooseUserCarTypeActivity extends AppCompatActivity {
      * 1：扫描二维码
      */
     private int mForwardType;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -131,50 +128,42 @@ public class ChooseUserCarTypeActivity extends AppCompatActivity {
      */
     private void getData() {
         String url = ConstKey.GET_CLLBXX_ADDRESS + ParamsBuilder.getParams();
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        String retContent = ParseReturnUtil.parseRetrun(response, ChooseUserCarTypeActivity.this);
-                        if (null == retContent) {
-                            return;
-                        }
-                        MyLog.i("解码返回数据：" + retContent);
-                        try {
-                            JSONObject object = new JSONObject(retContent);
-                            JSONArray jsonArray = object.getJSONArray("CLLXLB");
-                            TApplication.app.mCLJSSBID = object.getString("JSSBID");
-                            parseCLXX(jsonArray);
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-
-                    }
-                }, new Response.ErrorListener() {
+        Request<String> request = NoHttp.createStringRequest(url, RequestMethod.POST);
+        HashMap<String, String> map = new HashMap<>();
+        map.put("CLJSDD", TApplication.app.mSelectXZQHDM);
+        map.put("HGZMX", TApplication.app.mHGZMX);
+        map.put("SBBXX", TApplication.app.mSBBXX);
+        map.put("YHID", TApplication.app.mUserId);
+        MyLog.i(map.toString());
+        MyLog.i(ParamsBuilder.hashMapToJson(map));
+        String content = Base64.encodeToString(ParamsBuilder.hashMapToJson(map).getBytes(), Base64.DEFAULT);
+        MyLog.i(content);
+        map.clear();
+        map.put("content", content);
+        request.add(map);
+        CallServer.getRequestInstance().add(this, 0, request, new HttpListener<String>() {
             @Override
-            public void onErrorResponse(VolleyError error) {
+            public void onSucceed(int what, Response<String> response) {
+                String retContent = ParseReturnUtil.parseRetrun(response.get(), ChooseUserCarTypeActivity.this);
+                if (null == retContent) {
+                    return;
+                }
+                MyLog.i("解码返回数据：" + retContent);
+                try {
+                    JSONObject object = new JSONObject(retContent);
+                    JSONArray jsonArray = object.getJSONArray("CLLXLB");
+                    TApplication.app.mCLJSSBID = object.getString("JSSBID");
+                    parseCLXX(jsonArray);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
-        }) {
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                HashMap<String, String> map = new HashMap<>();
-                map.put("CLJSDD", TApplication.app.mSelectXZQHDM);
-                map.put("HGZMX", TApplication.app.mHGZMX);
-                map.put("SBBXX", TApplication.app.mSBBXX);
-                map.put("YHID", TApplication.app.mUserId);
-                MyLog.i(map.toString());
-                MyLog.i(ParamsBuilder.hashMapToJson(map));
-                String content = Base64.encodeToString(ParamsBuilder.hashMapToJson(map).getBytes(), Base64.DEFAULT);
-                MyLog.i(content);
-                map.clear();
-                map.put("content", content);
-                return map;
-            }
-        };
-        // 把这个请求加入请求队列
-        Volley.newRequestQueue(getApplicationContext()).add(stringRequest);
-        //TApplication.app.addToRequestQueue(stringRequest);
 
+            @Override
+            public void onFailed(int what, String url, Object tag, String error, int resCode, long ms) {
+
+            }
+        },false,false);
     }
 
     /**
@@ -184,50 +173,43 @@ public class ChooseUserCarTypeActivity extends AppCompatActivity {
         final String orderID = getIntent().getStringExtra("orderId");
         MyLog.i("getOrderDetailData -->orderId  " + orderID);
         String url = ConstKey.GRJSDD_DETAIL_ADDRESS + ParamsBuilder.getParams();
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        MyLog.i("AASDASADA-->"+response);
-                        String retContent = ParseReturnUtil.parseRetrun(response, ChooseUserCarTypeActivity.this);
-                        if (null == retContent) {
-                            return;
-                        }
-                        MyLog.i("解码返回数据：" + retContent);
-                        try {
-                            JSONObject object = new JSONObject(retContent);
-                            JSONArray jsonArray = object.getJSONArray("CLLXLB");
-                            TApplication.app.mSelectXZQHDM = object.getString("CLJSDD");
-                            TApplication.app.mCLJSSBID = object.getString("JSSBID");
-                            MyLog.i("TApplication.app.mSelectXZQHDM ----" + TApplication.app.mSelectXZQHDM);
-                            MyLog.i(" TApplication.app.mCLJSSBID ----" + TApplication.app.mCLJSSBID);
-                            parseCLXX(jsonArray);
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-
-                    }
-                }, new Response.ErrorListener() {
+        Request<String> request = NoHttp.createStringRequest(url,RequestMethod.POST);
+        HashMap<String, String> map = new HashMap<>();
+        map.put("DDID", orderID);
+        MyLog.i(map.toString());
+        MyLog.i(ParamsBuilder.hashMapToJson(map));
+        String content = Base64.encodeToString(ParamsBuilder.hashMapToJson(map).getBytes(), Base64.DEFAULT);
+        MyLog.i(content);
+        map.clear();
+        map.put("content", content);
+        request.add(map);
+        CallServer.getRequestInstance().add(this, 0, request, new HttpListener<String>() {
             @Override
-            public void onErrorResponse(VolleyError error) {
+            public void onSucceed(int what, Response<String> response) {
+                MyLog.i("AASDASADA-->"+response);
+                String retContent = ParseReturnUtil.parseRetrun(response.get(), ChooseUserCarTypeActivity.this);
+                if (null == retContent) {
+                    return;
+                }
+                MyLog.i("解码返回数据：" + retContent);
+                try {
+                    JSONObject object = new JSONObject(retContent);
+                    JSONArray jsonArray = object.getJSONArray("CLLXLB");
+                    TApplication.app.mSelectXZQHDM = object.getString("CLJSDD");
+                    TApplication.app.mCLJSSBID = object.getString("JSSBID");
+                    MyLog.i("TApplication.app.mSelectXZQHDM ----" + TApplication.app.mSelectXZQHDM);
+                    MyLog.i(" TApplication.app.mCLJSSBID ----" + TApplication.app.mCLJSSBID);
+                    parseCLXX(jsonArray);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
-        }) {
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                HashMap<String, String> map = new HashMap<>();
-                map.put("DDID", orderID);
-                MyLog.i(map.toString());
-                MyLog.i(ParamsBuilder.hashMapToJson(map));
-                String content = Base64.encodeToString(ParamsBuilder.hashMapToJson(map).getBytes(), Base64.DEFAULT);
-                MyLog.i(content);
-                map.clear();
-                map.put("content", content);
-                return map;
-            }
-        };
-        // 把这个请求加入请求队列
-        TApplication.app.addToRequestQueue(stringRequest);
 
+            @Override
+            public void onFailed(int what, String url, Object tag, String error, int resCode, long ms) {
+
+            }
+        },false,false);
     }
 
     private void parseCLXX(JSONArray jsonArray) throws JSONException {

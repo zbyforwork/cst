@@ -8,12 +8,7 @@ import android.view.Gravity;
 import android.view.View;
 import android.widget.ImageView;
 
-import com.android.volley.Request;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
 import com.hxkj.cst.cheshuotong.R;
-import com.hxkj.cst.cheshuotong.TApplication;
 import com.hxkj.cst.cheshuotong.adapter.CityAdapter;
 import com.hxkj.cst.cheshuotong.adapter.ProvinceAdapter;
 import com.hxkj.cst.cheshuotong.bean.XZQH;
@@ -23,22 +18,28 @@ import com.hxkj.cst.cheshuotong.utils.MyLog;
 import com.hxkj.cst.cheshuotong.utils.ParamsBuilder;
 import com.hxkj.cst.cheshuotong.utils.ParseReturnUtil;
 import com.marshalchen.ultimaterecyclerview.UltimateRecyclerView;
+import com.nohttp.CallServer;
+import com.nohttp.HttpListener;
+import com.yolanda.nohttp.NoHttp;
+import com.yolanda.nohttp.RequestMethod;
+import com.yolanda.nohttp.rest.Request;
+import com.yolanda.nohttp.rest.Response;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class PlaceLocationActivity extends Activity {
 
-    @Bind(R.id.iv_back)
+    @BindView(R.id.iv_back)
     ImageView mIvBack;
-    @Bind(R.id.recycleview_province)
+    @BindView(R.id.recycleview_province)
     UltimateRecyclerView mRecycleviewProvince;
-    @Bind(R.id.recycleview_city)
+    @BindView(R.id.recycleview_city)
     UltimateRecyclerView mRecycleviewCity;
-    @Bind(R.id.drawer_layout)
+    @BindView(R.id.drawer_layout)
     public DrawerLayout mDrawerLayout;
 
     List<XZQH> mProvinceList;
@@ -58,29 +59,26 @@ public class PlaceLocationActivity extends Activity {
     private void getData() {
         mProvinceList=new ArrayList<>();
         String url = ConstKey.GET_XZQHLB_ADDRESS + ParamsBuilder.getParams();
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        MyLog.i(response);
-                        final String retContent = ParseReturnUtil.parseRetrun(response, PlaceLocationActivity.this);
-                        if (retContent == null) {
-                            return;
-                        } else {
-                            MyLog.i(retContent);
-                            mProvinceList =  GsonTools.parserJsonToArrayBeans(retContent, "XZQHLB", XZQH.class);
-                            init();
-                        }
-                    }
-                }
-                , new Response.ErrorListener() {
+        Request<String> request = NoHttp.createStringRequest(url, RequestMethod.POST);
+        CallServer.getRequestInstance().add(this, 0, request, new HttpListener<String>() {
             @Override
-            public void onErrorResponse(VolleyError error) {
+            public void onSucceed(int what, Response<String> response) {
+                MyLog.i(response.get());
+                final String retContent = ParseReturnUtil.parseRetrun(response.get(), PlaceLocationActivity.this);
+                if (retContent == null) {
+                    return;
+                } else {
+                    MyLog.i(retContent);
+                    mProvinceList =  GsonTools.parserJsonToArrayBeans(retContent, "XZQHLB", XZQH.class);
+                    init();
+                }
             }
-        });
-        // 把这个请求加入请求队列
-        TApplication.app.addToRequestQueue(stringRequest);
 
+            @Override
+            public void onFailed(int what, String url, Object tag, String error, int resCode, long ms) {
+
+            }
+        },false,false);
     }
 
     private void init() {

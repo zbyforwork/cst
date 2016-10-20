@@ -1,10 +1,7 @@
 package com.hxkj.cst.cheshuotong.adapter;
 
-import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Bitmap;
-import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,40 +9,32 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.GravityEnum;
 import com.afollestad.materialdialogs.MaterialDialog;
-import com.android.volley.AuthFailureError;
-import com.android.volley.Request;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
 import com.google.zxing.WriterException;
-import com.hxkj.cst.cheshuotong.MainActivity;
 import com.hxkj.cst.cheshuotong.R;
 import com.hxkj.cst.cheshuotong.TApplication;
-import com.hxkj.cst.cheshuotong.activity.AddCarActivity;
 import com.hxkj.cst.cheshuotong.activity.AppointmentActivity;
-import com.hxkj.cst.cheshuotong.activity.PayTaxesSeven;
-import com.hxkj.cst.cheshuotong.activity.PlaceLocationActivity;
-import com.hxkj.cst.cheshuotong.bean.SWJG;
 import com.hxkj.cst.cheshuotong.bean.YYXX;
 import com.hxkj.cst.cheshuotong.utils.Base64;
 import com.hxkj.cst.cheshuotong.utils.ConstKey;
 import com.hxkj.cst.cheshuotong.utils.DensityUtils;
-import com.hxkj.cst.cheshuotong.utils.GsonTools;
 import com.hxkj.cst.cheshuotong.utils.MyLog;
-import com.hxkj.cst.cheshuotong.utils.MyToast;
 import com.hxkj.cst.cheshuotong.utils.ParamsBuilder;
 import com.hxkj.cst.cheshuotong.utils.ParseReturnUtil;
 import com.hxkj.cst.cheshuotong.utils.QRGenerate;
 import com.marshalchen.ultimaterecyclerview.UltimateRecyclerviewViewHolder;
 import com.marshalchen.ultimaterecyclerview.UltimateViewAdapter;
+import com.nohttp.CallServer;
+import com.nohttp.HttpListener;
+import com.yolanda.nohttp.NoHttp;
+import com.yolanda.nohttp.RequestMethod;
+import com.yolanda.nohttp.rest.Request;
+import com.yolanda.nohttp.rest.Response;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+
 
 /**
  * 刘杨
@@ -101,26 +90,35 @@ public class YYXXAdapter extends UltimateViewAdapter<YYXXAdapter.ViewHolder> {
 
     private void MakeAppointment(final String jgdm) {
         String url = ConstKey.CLYYJS_YYJS + ParamsBuilder.getParams();
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        final String retContent = ParseReturnUtil.parseRetrun(response, mContext);
-                        if (retContent == null || retContent.equals("[]")) {
+
+        Request<String> request = NoHttp.createStringRequest(url, RequestMethod.POST);
+        HashMap<String, String> map = new HashMap<>();
+        map.put("CLJSSBID", TApplication.app.mCLJSSBID);
+        map.put("SWJGDM", jgdm);
+        String content = Base64.encodeToString(ParamsBuilder.hashMapToJson(map).getBytes(), Base64.DEFAULT);
+        map.clear();
+        MyLog.i(content);
+        map.put("content", content);
+        request.add(map);
+        CallServer.getRequestInstance().add(mContext, 0, request, new HttpListener<String>() {
+            @Override
+            public void onSucceed(int what, Response<String> response) {
+                final String retContent = ParseReturnUtil.parseRetrun(response.get(), mContext);
+                if (retContent == null || retContent.equals("[]")) {
                             /*new AlertView("预约失败!", null, "确定", null, null, mContext, null, null).setCancelable(false).show();*/
-                            new MaterialDialog.Builder(mContext)
-                                    .title("错误")
-                                    .content("预约失败!")
-                                    .positiveText("确定")
-                                    .cancelable(false)
-                                    .show();
-                            return;
-                        }
-                        MyLog.i(retContent);
-                        ImageView imageView = new ImageView(mContext);
-                        try {
-                            Bitmap bitmap = QRGenerate.createQRCode(retContent, DensityUtils.dp2px(mContext, 200.0f));
-                            imageView.setImageBitmap(bitmap);
+                    new MaterialDialog.Builder(mContext)
+                            .title("错误")
+                            .content("预约失败!")
+                            .positiveText("确定")
+                            .cancelable(false)
+                            .show();
+                    return;
+                }
+                MyLog.i(retContent);
+                ImageView imageView = new ImageView(mContext);
+                try {
+                    Bitmap bitmap = QRGenerate.createQRCode(retContent, DensityUtils.dp2px(mContext, 200.0f));
+                    imageView.setImageBitmap(bitmap);
                             /*AlertView alertView = new AlertView("预约成功!", null, null, new String[]{"确定"}, null, mContext, null, new OnItemClickListener() {
                                 @Override
                                 public void onItemClick(Object o, int position) {
@@ -129,44 +127,29 @@ public class YYXXAdapter extends UltimateViewAdapter<YYXXAdapter.ViewHolder> {
                                 }
                             }).setCancelable(false)
                                     .addExtView(imageView);*/
-                            MaterialDialog dialog = new MaterialDialog.Builder(mContext)
-                                    .title("预约成功！")
-                                    .customView(imageView, true)
-                                    .positiveText("确定")
-                                    .titleGravity(GravityEnum.CENTER)
-                                    .contentGravity(GravityEnum.CENTER)
-                                    .callback(new MaterialDialog.ButtonCallback() {
-                                        @Override
-                                        public void onPositive(MaterialDialog dialog) {
-                                            ((AppointmentActivity) mContext).finish();
-                                        }
-                                    }).build();
-                            dialog.show();
-                        } catch (WriterException e) {
-                            e.printStackTrace();
-                        }
-                    }
+                    MaterialDialog dialog = new MaterialDialog.Builder(mContext)
+                            .title("预约成功！")
+                            .customView(imageView, true)
+                            .positiveText("确定")
+                            .titleGravity(GravityEnum.CENTER)
+                            .contentGravity(GravityEnum.CENTER)
+                            .callback(new MaterialDialog.ButtonCallback() {
+                                @Override
+                                public void onPositive(MaterialDialog dialog) {
+                                    ((AppointmentActivity) mContext).finish();
+                                }
+                            }).build();
+                    dialog.show();
+                } catch (WriterException e) {
+                    e.printStackTrace();
                 }
-                , new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
             }
-        }
-        ) {
+
             @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                HashMap<String, String> map = new HashMap<>();
-                map.put("CLJSSBID", TApplication.app.mCLJSSBID);
-                map.put("SWJGDM", jgdm);
-                String content = Base64.encodeToString(ParamsBuilder.hashMapToJson(map).getBytes(), Base64.DEFAULT);
-                map.clear();
-                MyLog.i(content);
-                map.put("content", content);
-                return map;
+            public void onFailed(int what, String url, Object tag, String error, int resCode, long ms) {
+
             }
-        };
-        // 把这个请求加入请求队列
-        TApplication.app.addToRequestQueue(stringRequest);
+        },false,false);
     }
 
 

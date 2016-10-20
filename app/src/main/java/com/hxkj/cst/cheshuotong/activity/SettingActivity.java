@@ -9,7 +9,7 @@ import android.widget.RelativeLayout;
 
 import com.hxkj.cst.cheshuotong.R;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class SettingActivity extends Activity implements View.OnClickListener {
@@ -18,28 +18,28 @@ public class SettingActivity extends Activity implements View.OnClickListener {
     /**
      * 返回
      */
-    @Bind(R.id.iv_back)
+    @BindView(R.id.iv_back)
     ImageView ivBack;
-    @Bind(R.id.iv_pushSettingone)
+    @BindView(R.id.iv_pushSettingone)
     ImageView ivPushSettingone;
     /**
      * 推送设置
      */
-    @Bind(R.id.rel_pushSettingone)
+    @BindView(R.id.rel_pushSettingone)
     RelativeLayout relPushSettingone;
-    @Bind(R.id.iv_suggestionBack)
+    @BindView(R.id.iv_suggestionBack)
     ImageView ivSuggestionBack;
     /**
      * 意见反馈
      */
-    @Bind(R.id.rel_suggestionBack)
+    @BindView(R.id.rel_suggestionBack)
     RelativeLayout relSuggestionBack;
-    @Bind(R.id.iv_checkupdate)
+    @BindView(R.id.iv_checkupdate)
     ImageView ivCheckupdate;
     /**
      * 检查更新
      */
-    @Bind(R.id.rel_checkupdate)
+    @BindView(R.id.rel_checkupdate)
     RelativeLayout relCheckupdate;
 
     @Override

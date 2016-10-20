@@ -1,161 +1,166 @@
 package com.hxkj.cst.cheshuotong.fragement;
 
 import android.content.Intent;
+import android.content.res.TypedArray;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 
-import com.bigkoo.convenientbanner.CBViewHolderCreator;
+import com.baidu.MapActivity;
 import com.bigkoo.convenientbanner.ConvenientBanner;
 import com.hxkj.cst.cheshuotong.R;
-import com.hxkj.cst.cheshuotong.TApplication;
 import com.hxkj.cst.cheshuotong.activity.AddCarActivity;
 import com.hxkj.cst.cheshuotong.activity.ArchivesActivity;
 import com.hxkj.cst.cheshuotong.activity.BreakRuleActivity;
-import com.hxkj.cst.cheshuotong.activity.BuilddingActivity;
 import com.hxkj.cst.cheshuotong.activity.PayTaxesActivity;
-import com.hxkj.cst.cheshuotong.utils.MyToast;
+import com.hxkj.cst.cheshuotong.adapter.HomeCBAdapter;
+import com.hxkj.cst.cheshuotong.adapter.HomeUrecyclerAdapter;
+import com.hxkj.cst.cheshuotong.bean.CardBean;
 import com.hxkj.cst.cheshuotong.utils.ScreenUtils;
-import com.hxkj.cst.cheshuotong.widget.NetworkImageHolderView;
+import com.hxkj.cst.cheshuotong.widget.CustomIcon;
+import com.marshalchen.ultimaterecyclerview.UltimateRecyclerView;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
+/**
+ * Created by luoyang on 2016/10/10. 主页内容
+ */
 
-public class HomeFragment extends Fragment implements View.OnClickListener {
+public class HomeFragment extends Fragment {
 
+    @BindView(R.id.home_ultimaterecyclerview)
+    UltimateRecyclerView mHomeUltimaterecyclerview;
 
-    @Bind(R.id.iv_add_car)
-    ImageView mIvAddCar;
-    @Bind(R.id.ico1)
-    LinearLayout ico1;
-    @Bind(R.id.ico2)
-    LinearLayout ico2;
-    @Bind(R.id.ico3)
-    LinearLayout ico3;
-    @Bind(R.id.ico4)
-    LinearLayout ico4;
-    @Bind(R.id.ico5)
-    LinearLayout ico5;
-    @Bind(R.id.ico6)
-    LinearLayout ico6;
-    @Bind(R.id.convenientBanner)
     ConvenientBanner mConvenientBanner;
-    @Bind(R.id.rl_pay_taxs)
-    RelativeLayout mRlPayTaxs;
-    private List<String> networkImages;
-
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+    }
+
+    @Nullable
+    @Override
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
         ButterKnife.bind(this, view);
-        setLinstener();
-        init();
-        showBanner();
+        setUpHeaderAndInitRecycler();
         return view;
     }
 
-    private void showBanner() {
-        networkImages = new ArrayList<>();
-        networkImages.add("res://x/" + R.drawable.banner1);
-        networkImages.add("res://x/" + R.drawable.banner2);
-        networkImages.add("res://x/" + R.drawable.banner3);
-        networkImages.add("res://x/" + R.drawable.banner4);
-        mConvenientBanner.setPages(new CBViewHolderCreator<NetworkImageHolderView>() {
-            @Override
-            public NetworkImageHolderView createHolder() {
-                return new NetworkImageHolderView(networkImages);
-            }
-        }, networkImages)
-                //设置两个点图片作为翻页指示器，不设置则没有指示器，可以根据自己需求自行配合自己的指示器,不需要圆点指示器可用不设
-                .setPageIndicator(new int[]{R.drawable.ic_page_indicator, R.drawable.ic_page_indicator_focused})
-                        //设置翻页的效果，不需要翻页效果可用不设
-                .setPageTransformer(ConvenientBanner.Transformer.DefaultTransformer)
-                .startTurning(3000);
-    }
-
-    private void init() {
+    private void setUpHeaderAndInitRecycler() {
+        View view = LayoutInflater.from(getActivity()).inflate(R.layout.item_home_header,
+                mHomeUltimaterecyclerview, false);
+        mConvenientBanner = (ConvenientBanner) view.findViewById(R.id.convenient_banner);
+        /*适配广告栏高度*/
         setBannerSize();
-    }
+        bindingConvenientBannerData();
+        setHomeIconListener(view);
 
+        LinearLayoutManager lm = new LinearLayoutManager(getActivity());
+        lm.setOrientation(LinearLayoutManager.VERTICAL);
+        lm.setSmoothScrollbarEnabled(true);
+
+
+        mHomeUltimaterecyclerview.setLayoutManager(lm);
+        //初始化 测试数据
+        SparseArray<CardBean> cardBeanSparseArray = new SparseArray<>();
+        for (int i = 0; i < 25; i++) {
+            CardBean cardBean = new CardBean("CardNick" + i, "CardModel" + i, "CardNumber" + i);
+            cardBeanSparseArray.append(i, cardBean);
+        }
+        HomeUrecyclerAdapter homeUrecyclerAdapter = new HomeUrecyclerAdapter(
+                getActivity(),cardBeanSparseArray);
+        mHomeUltimaterecyclerview.setAdapter(homeUrecyclerAdapter);
+        mHomeUltimaterecyclerview.setRefreshing(false);
+
+        mHomeUltimaterecyclerview.setParallaxHeader(view);
+
+        mHomeUltimaterecyclerview.enableDefaultSwipeRefresh(true);
+        mHomeUltimaterecyclerview.setDefaultOnRefreshListener(() ->
+                //下拉刷新
+                mHomeUltimaterecyclerview.setRefreshing(false));
+    }
 
     private void setBannerSize() {
-        //设置banner的宽高 16:9
+        //设置banner的宽高 16:6.5
         int witdth = ScreenUtils.getScreenWidth(getActivity());
         ViewGroup.LayoutParams lp = mConvenientBanner.getLayoutParams();
         lp.width = witdth;
-        lp.height = (int) (witdth * 9.0 / 16);
+        lp.height = witdth * 130 / 320;
         mConvenientBanner.setLayoutParams(lp);
     }
 
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        ButterKnife.unbind(this);
+    private void setHomeIconListener(View view) {
+        ViewHolder viewHolder = new ViewHolder(view);
+
+        viewHolder.mHomeIconCircum.setOnClickListener(view1 -> {
+            //周边钮
+            startActivity(new Intent(getActivity(), MapActivity.class));
+        });
+
+        viewHolder.mHomeIconCard.setOnClickListener(view1 -> {
+            //添加车辆
+            startActivity(new Intent(getActivity(), AddCarActivity.class));
+        });
+
+        viewHolder.mHomeIconPeccancy.setOnClickListener(view1 -> {
+            //违章记录
+            startActivity(new Intent(getActivity(), BreakRuleActivity.class));
+        });
+
+        viewHolder.mHomeIconArchives.setOnClickListener(view1 -> {
+            //档案
+            startActivity(new Intent(getActivity(), ArchivesActivity.class));
+        });
+
+        viewHolder.mHomeIconPaytax.setOnClickListener(view1 -> {
+            //缴税
+            startActivity(new Intent(getActivity(), PayTaxesActivity.class));
+        });
     }
 
-    public void setLinstener() {
-        ico1.setOnClickListener(this);
-        ico2.setOnClickListener(this);
-        ico3.setOnClickListener(this);
-        ico4.setOnClickListener(this);
-        ico5.setOnClickListener(this);
-        ico6.setOnClickListener(this);
-        mRlPayTaxs.setOnClickListener(this);
-        mIvAddCar.setOnClickListener(this);
-    }
+    List<Integer> convenientBannerDtaSource;
 
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.ico1:
-                Intent intent = new Intent(getActivity(), ArchivesActivity.class);
-                startActivity(intent);
-                break;
-            case R.id.ico2:
-                intent = new Intent(getActivity(), BreakRuleActivity.class);
-                startActivity(intent);
-                break;
-            case R.id.ico3:
-                intent = new Intent(getActivity(), BuilddingActivity.class);
-                startActivity(intent);
-                break;
-            case R.id.ico4:
-                intent = new Intent(getActivity(), BuilddingActivity.class);
-                startActivity(intent);
-                break;
-            case R.id.ico5:
-                intent = new Intent(getActivity(), BuilddingActivity.class);
-                startActivity(intent);
-                break;
-            case R.id.ico6:
-                intent = new Intent(getActivity(), BuilddingActivity.class);
-                startActivity(intent);
-                break;
-            case R.id.rl_pay_taxs:
-                intent = new Intent(getActivity(), PayTaxesActivity.class);
-                startActivity(intent);
-                break;
-            case R.id.iv_add_car:
-                if (TApplication.app.mUserId == null) {
-                    MyToast.showShortMessage(getActivity(), "请先登录再进行添加车辆操作");
-                    return;
-                }
-                startActivity(new Intent(getActivity(), AddCarActivity.class));
-                break;
-
+    private void bindingConvenientBannerData() {
+        convenientBannerDtaSource = new ArrayList<>();
+        TypedArray typedArray = getResources().obtainTypedArray(R.array.convenientBannerDataSource);
+        for (int i = 0; i < typedArray.length(); i++) {
+            convenientBannerDtaSource.add(typedArray.getResourceId(i, 0));
         }
+        typedArray.recycle();
 
+        HomeCBAdapter homeCBAdapter = new HomeCBAdapter(convenientBannerDtaSource);
+        mConvenientBanner.setPages(() -> homeCBAdapter,
+                convenientBannerDtaSource)
+                //设置两个点图片作为翻页指示器，不设置则没有指示器，可以根据自己需求自行配合自己的指示器,不需要圆点指示器可用不设
+                .setPageIndicator(new int[]{R.mipmap.ic_page_indicator, R.mipmap.ic_page_indicator_focused}).startTurning(3000);
+                //设置翻页的效果，不需要翻页效果可用不设
     }
+
+    public class ViewHolder {
+        @BindView(R.id.home_icon_circum)
+        CustomIcon mHomeIconCircum;
+        @BindView(R.id.home_icon_card)
+        CustomIcon mHomeIconCard;
+        @BindView(R.id.home_icon_peccancy)
+        CustomIcon mHomeIconPeccancy;
+        @BindView(R.id.home_icon_archives)
+        CustomIcon mHomeIconArchives;
+        @BindView(R.id.home_icon_paytax)
+        CustomIcon mHomeIconPaytax;
+
+        ViewHolder(View view) {
+            ButterKnife.bind(this, view);
+        }
+    }
+
 }

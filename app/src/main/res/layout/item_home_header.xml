@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+
+    <com.bigkoo.convenientbanner.ConvenientBanner
+        android:id="@+id/convenient_banner"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/convenient_banner_height"
+        app:canLoop="true"/>
+
+    <android.support.percent.PercentRelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="183dp">
+
+
+        <com.hxkj.cst.cheshuotong.widget.CustomIcon
+            android:id="@+id/home_icon_circum"
+            style="@style/home_header_icon"
+            app:describe="@string/icon_circum"
+            app:drawable="@mipmap/proximitybutton"
+            app:drawableHeight="54dp"
+            app:drawableWith="54dp"
+            app:layout_marginLeftPercent="12%"/>
+
+        <com.hxkj.cst.cheshuotong.widget.CustomIcon
+            android:id="@+id/home_icon_card"
+            style="@style/home_header_icon"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            app:describe="@string/icon_add_card"
+            app:drawable="@mipmap/addcarbutton"
+            app:drawableHeight="54dp"
+            app:drawableWith="54dp"
+            app:layout_marginRightPercent="12%"/>
+
+        <com.hxkj.cst.cheshuotong.widget.CustomIcon
+            android:id="@+id/home_icon_peccancy"
+            style="@style/home_header_icon"
+            android:layout_below="@+id/home_icon_circum"
+            app:describe="@string/icon_peccancy"
+            app:drawable="@mipmap/peccancybutton"
+            app:drawableHeight="54dp"
+            app:drawableWith="54dp"
+            app:layout_marginLeftPercent="12%"/>
+
+        <com.hxkj.cst.cheshuotong.widget.CustomIcon
+            android:id="@+id/home_icon_archives"
+            style="@style/home_header_icon"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/home_icon_circum"
+            app:describe="@string/icon_Archives"
+            app:drawable="@mipmap/archivesbutton"
+            app:drawableHeight="54dp"
+            app:drawableWith="54dp"
+            app:layout_marginRightPercent="12%"/>
+
+        <com.hxkj.cst.cheshuotong.widget.CustomIcon
+            android:id="@+id/home_icon_paytax"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            app:describe="@string/icon_paytax"
+            app:drawable="@mipmap/paytaxbutton"
+            app:drawableHeight="88dp"
+            app:drawableWith="88dp"/>
+
+
+    </android.support.percent.PercentRelativeLayout>
+
+
+</LinearLayout>

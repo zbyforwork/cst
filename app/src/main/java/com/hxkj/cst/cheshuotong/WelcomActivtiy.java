@@ -11,21 +11,19 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.facebook.drawee.view.SimpleDraweeView;
-import com.hxkj.cst.cheshuotong.activity.AccountloginActivity;
 
-import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class WelcomActivtiy extends Activity {
 
-    @Bind(R.id.convenientBanner)
+    @BindView(R.id.convenientBanner)
     ViewPager convenientBanner;
 
-    SimpleDraweeView[] mImageView=null;
+    SimpleDraweeView[] mImageView = null;
 
     List<Integer> localImages = new ArrayList<Integer>();
 
@@ -45,24 +43,25 @@ public class WelcomActivtiy extends Activity {
         localImages.add(R.drawable.welcomtwo);
         localImages.add(R.drawable.welcomthree);
 
-        mImageView=new SimpleDraweeView[localImages.size()];
+        mImageView = new SimpleDraweeView[localImages.size()];
 
-        ViewGroup.LayoutParams params=new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.MATCH_PARENT);
-        for (int i=0;i<localImages.size();i++){
-            mImageView[i]=new SimpleDraweeView(getApplicationContext());
-            mImageView[i].setImageURI(Uri.parse("res://x/"+localImages.get(i)));
+        ViewGroup.LayoutParams params = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+        for (int i = 0; i < localImages.size(); i++) {
+            mImageView[i] = new SimpleDraweeView(getApplicationContext());
+            mImageView[i].setImageURI(Uri.parse("res://x/" + localImages.get(i)));
             mImageView[i].setScaleType(ImageView.ScaleType.FIT_XY);
             mImageView[i].setLayoutParams(params);
         }
-        mImageView[localImages.size()-1].setOnClickListener(new View.OnClickListener() {
+        mImageView[localImages.size() - 1].setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(WelcomActivtiy.this,MainActivity.class));
+                startActivity(new Intent(WelcomActivtiy.this, MainActivity.class));
                 finish();
             }
         });
 
-        convenientBanner.setAdapter(new MyAdapter());
+        MyAdapter myAdapter = new MyAdapter();
+        convenientBanner.setAdapter(myAdapter);
     }
 
 

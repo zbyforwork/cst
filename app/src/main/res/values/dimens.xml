@@ -20,4 +20,8 @@
     <dimen name="thin_divider">1dp</dimen>
     <dimen name="yyxx_divider">10dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
+
+    <dimen name="convenient_banner_height">100dp</dimen>
 </resources>
+
+

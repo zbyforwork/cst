@@ -5,7 +5,6 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,13 +17,7 @@ import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
-import com.android.volley.AuthFailureError;
-import com.android.volley.Request;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
 import com.hxkj.cst.cheshuotong.R;
 import com.hxkj.cst.cheshuotong.TApplication;
 import com.hxkj.cst.cheshuotong.utils.Base64;
@@ -35,11 +28,16 @@ import com.hxkj.cst.cheshuotong.utils.MyToast;
 import com.hxkj.cst.cheshuotong.utils.ParamsBuilder;
 import com.hxkj.cst.cheshuotong.utils.ParseReturnUtil;
 import com.hxkj.cst.cheshuotong.utils.ScreenUtils;
+import com.nohttp.CallServer;
+import com.nohttp.HttpListener;
+import com.yolanda.nohttp.NoHttp;
+import com.yolanda.nohttp.RequestMethod;
+import com.yolanda.nohttp.rest.Request;
+import com.yolanda.nohttp.rest.Response;
 
 import java.util.HashMap;
-import java.util.Map;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class AddCarActivity extends Activity {
@@ -47,73 +45,73 @@ public class AddCarActivity extends Activity {
 	/**
 	 * 返回
 	 */
-	@Bind(R.id.iv_back)
+	@BindView(R.id.iv_back)
 	ImageView ivBack;
 	/**
 	 * 车辆类型
 	 */
-	@Bind(R.id.tv_car)
+	@BindView(R.id.tv_car)
 	TextView tvCar;
 	/**
 	 * 车型
 	 */
-	@Bind(R.id.tv_carType)
+	@BindView(R.id.tv_carType)
 	TextView tvCarType;
 	/**
 	 * 车型
 	 */
-	@Bind(R.id.tv_carType2)
+	@BindView(R.id.tv_carType2)
 	TextView tvCarType2;
-	@Bind(R.id.iv_carType1)
+	@BindView(R.id.iv_carType1)
 	ImageView ivCarType1;
 	/**
 	 * 车架号
 	 */
-	@Bind(R.id.tv_chejiahao)
+	@BindView(R.id.tv_chejiahao)
 	TextView tvChejiahao;
 	/**
 	 * 车架号输入
 	 */
-	@Bind(R.id.et_chejiahao2)
+	@BindView(R.id.et_chejiahao2)
 	EditText etChejiahao2;
 	/**
 	 * 加入问号
 	 */
-	@Bind(R.id.iv_question)
+	@BindView(R.id.iv_question)
 	ImageView mIvQuestion;
 	/**
 	 * 备注
 	 */
-	@Bind(R.id.tv_remarks)
+	@BindView(R.id.tv_remarks)
 	TextView tvRemarks;
 	/**
 	 * 备注2
 	 */
-	@Bind(R.id.tv_remarkss2)
+	@BindView(R.id.tv_remarkss2)
 	EditText tvRemarkss2;
 
-	@Bind(R.id.rel_tips)
+	@BindView(R.id.rel_tips)
 	RelativeLayout relTips;
 	/**
 	 * 确定
 	 */
-	@Bind(R.id.bt_sure)
+	@BindView(R.id.bt_sure)
 	Button btSure;
-	@Bind(R.id.iv_jump_to_place_location)
+	@BindView(R.id.iv_jump_to_place_location)
 	ImageView mIvJumpToPlaceLocation;
-	@Bind(R.id.tv_location)
+	@BindView(R.id.tv_location)
 	TextView mTvLocation;
-	@Bind(R.id.linearlayout_car_type_small)
+	@BindView(R.id.linearlayout_car_type_small)
 	LinearLayout mLinearlayoutCarTypeSmall;
-	@Bind(R.id.linearlayout_car_type_great)
+	@BindView(R.id.linearlayout_car_type_great)
 	LinearLayout mLinearlayoutCarTypeGreat;
-	@Bind(R.id.tv_add_car_belong_key)
+	@BindView(R.id.tv_add_car_belong_key)
 	TextView mTvAddCarBelongKey;
-	@Bind(R.id.linearlayout_car_license_hanzi)
+	@BindView(R.id.linearlayout_car_license_hanzi)
 	LinearLayout mLinearlayoutCarLicenseHanzi;
-	@Bind(R.id.edittext_car_license_number)
+	@BindView(R.id.edittext_car_license_number)
 	EditText mEdittextCarLicenseNumber;
-	@Bind(R.id.linearlayout_car_license)
+	@BindView(R.id.linearlayout_car_license)
 	LinearLayout mLinearlayoutCarLicense;
 	private PopupWindow popupWindow;
 
@@ -208,43 +206,39 @@ public class AddCarActivity extends Activity {
 		}
 		final String alias = tvRemarkss2.getText().toString().trim();
 		final String finalCphlx = cphlx;
+
 		String url = ConstKey.ADD_CAR_ADDRESS + ParamsBuilder.getParams();
-		StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
-				new Response.Listener<String>() {
-					@Override
-					public void onResponse(String response) {
-						MyLog.i(response);
-						final String retContent = ParseReturnUtil.parseRetrun(response, AddCarActivity.this);
-						if (retContent != null) {
-							MyToast.showShortMessage(AddCarActivity.this, "添加成功!");
-							finish();
-						}
-					}
+		CallServer callServer = CallServer.getRequestInstance();
+		Request<String> request = NoHttp.createStringRequest(url, RequestMethod.POST);
+		HashMap<String, String> map = new HashMap<>();
+		map.put("YHID", TApplication.app.mUserId);
+		map.put("SZQY", mXZQHDM);
+		map.put("CLLBID", mCLID);
+		map.put("CPHLX", finalCphlx);
+		map.put("CPH", cph);
+		map.put("CJH", cjh);
+		map.put("ALIAS", alias);
+		String content = Base64.encodeToString(ParamsBuilder.hashMapToJson(map).getBytes(), Base64.DEFAULT);
+		map.clear();
+		MyLog.i(content);
+		map.put("content", content);
+		request.add(map);
+		callServer.add(this, 0, request, new HttpListener<String>() {
+			@Override
+			public void onSucceed(int what, Response<String> response) {
+				MyLog.i(response.get());
+				final String retContent = ParseReturnUtil.parseRetrun(response.get(), AddCarActivity.this);
+				if (retContent != null) {
+					MyToast.showShortMessage(AddCarActivity.this, "添加成功!");
+					finish();
 				}
-				, new Response.ErrorListener() {
-			@Override
-			public void onErrorResponse(VolleyError error) {
 			}
-		}) {
+
 			@Override
-			protected Map<String, String> getParams() throws AuthFailureError {
-				HashMap<String, String> map = new HashMap<>();
-				map.put("YHID", TApplication.app.mUserId);
-				map.put("SZQY", mXZQHDM);
-				map.put("CLLBID", mCLID);
-				map.put("CPHLX", finalCphlx);
-				map.put("CPH", cph);
-				map.put("CJH", cjh);
-				map.put("ALIAS", alias);
-				String content = Base64.encodeToString(ParamsBuilder.hashMapToJson(map).getBytes(), Base64.DEFAULT);
-				map.clear();
-				MyLog.i(content);
-				map.put("content", content);
-				return map;
+			public void onFailed(int what, String url, Object tag, String error, int resCode, long ms) {
+
 			}
-		};
-		// 把这个请求加入请求队列
-		TApplication.app.addToRequestQueue(stringRequest);
+		},false,false);
 	}
 
 	@Override

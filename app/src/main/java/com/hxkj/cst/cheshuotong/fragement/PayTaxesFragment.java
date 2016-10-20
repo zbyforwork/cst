@@ -9,11 +9,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.android.volley.AuthFailureError;
-import com.android.volley.Request;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
 import com.hxkj.cst.cheshuotong.R;
 import com.hxkj.cst.cheshuotong.TApplication;
 import com.hxkj.cst.cheshuotong.adapter.OrderAdapter;
@@ -25,18 +20,23 @@ import com.hxkj.cst.cheshuotong.utils.MyLog;
 import com.hxkj.cst.cheshuotong.utils.ParamsBuilder;
 import com.hxkj.cst.cheshuotong.utils.ParseReturnUtil;
 import com.marshalchen.ultimaterecyclerview.UltimateRecyclerView;
+import com.nohttp.CallServer;
+import com.nohttp.HttpListener;
+import com.yolanda.nohttp.NoHttp;
+import com.yolanda.nohttp.RequestMethod;
+import com.yolanda.nohttp.rest.Request;
+import com.yolanda.nohttp.rest.Response;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Map;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
 
 public class PayTaxesFragment extends Fragment {
 
-    @Bind(R.id.recycleview_order)
+    @BindView(R.id.recycleview_order)
     UltimateRecyclerView recycleviewOrder;
     boolean hasShow;
 
@@ -76,50 +76,38 @@ public class PayTaxesFragment extends Fragment {
 
     private void getData() {
         String url = ConstKey.GRJSDD_ADDRESS + ParamsBuilder.getParams();
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        MyLog.i(response);
-                        final String retContent = ParseReturnUtil.parseRetrun(response, getActivity());
-                        if (TextUtils.isEmpty(retContent)) {
-                            return;
-                        }
-                        ArrayList<PayTaxOrder> orders = (ArrayList<PayTaxOrder>) GsonTools.parserJsonToArrayBeans(retContent, "DDLB", PayTaxOrder.class);
-                        MyLog.i(orders.toString());
-                        LinearLayoutManager lm = new LinearLayoutManager(getActivity());
-                        OrderAdapter adpater = new OrderAdapter(getActivity(), orders);
-                        recycleviewOrder.setLayoutManager(lm);
-                        recycleviewOrder.setAdapter(adpater);
-                        recycleviewOrder.setRefreshing(false);
-                        hasShow = true;
-                    }
+        CallServer callServer = CallServer.getRequestInstance();
+        Request<String> request = NoHttp.createStringRequest(url, RequestMethod.POST);
+        HashMap<String, String> map = new HashMap<>();
+        map.put("YHID", TApplication.app.mUserId);
+        String content = Base64.encodeToString(ParamsBuilder.hashMapToJson(map).getBytes(), Base64.DEFAULT);
+        map.clear();
+        MyLog.i("content:-->" + content);
+        map.put("content", content);
+        request.add(map);
+        callServer.add(getActivity(), 0, request, new HttpListener<String>() {
+            @Override
+            public void onSucceed(int what, Response<String> response) {
+                MyLog.i(response.get());
+                final String retContent = ParseReturnUtil.parseRetrun(response.get(), getActivity());
+                if (TextUtils.isEmpty(retContent)) {
+                    return;
                 }
-                , new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
+                ArrayList<PayTaxOrder> orders = (ArrayList<PayTaxOrder>) GsonTools.parserJsonToArrayBeans(retContent, "DDLB", PayTaxOrder.class);
+                MyLog.i(orders.toString());
+                LinearLayoutManager lm = new LinearLayoutManager(getActivity());
+                OrderAdapter adpater = new OrderAdapter(getActivity(), orders);
+                recycleviewOrder.setLayoutManager(lm);
+                recycleviewOrder.setAdapter(adpater);
+                recycleviewOrder.setRefreshing(false);
+                hasShow = true;
             }
-        }
-        ) {
+
             @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                HashMap<String, String> map = new HashMap<>();
-                map.put("YHID", TApplication.app.mUserId);
-                String content = Base64.encodeToString(ParamsBuilder.hashMapToJson(map).getBytes(), Base64.DEFAULT);
-                map.clear();
-                MyLog.i("content:-->" + content);
-                map.put("content", content);
-                return map;
+            public void onFailed(int what, String url, Object tag, String error, int resCode, long ms) {
+
             }
-        };
-        // 把这个请求加入请求队列
-        TApplication.app.addToRequestQueue(stringRequest);
+        }, false, false);
 
-    }
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        ButterKnife.unbind(this);
     }
 }

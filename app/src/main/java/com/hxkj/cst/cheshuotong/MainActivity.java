@@ -18,10 +18,6 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.android.volley.Request;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
 import com.hxkj.cst.cheshuotong.activity.BuilddingActivity;
 import com.hxkj.cst.cheshuotong.adapter.MainFragmentPagerAdapter;
 import com.hxkj.cst.cheshuotong.fragement.HomeFragment;
@@ -33,10 +29,16 @@ import com.hxkj.cst.cheshuotong.utils.MyToast;
 import com.hxkj.cst.cheshuotong.utils.ParamsBuilder;
 import com.hxkj.cst.cheshuotong.utils.ParseReturnUtil;
 import com.hxkj.cst.cheshuotong.utils.PreferenceUtils;
+import com.nohttp.CallServer;
+import com.nohttp.HttpListener;
+import com.yolanda.nohttp.NoHttp;
+import com.yolanda.nohttp.RequestMethod;
+import com.yolanda.nohttp.rest.Request;
+import com.yolanda.nohttp.rest.Response;
 
 import java.util.Date;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class MainActivity extends FragmentActivity {
@@ -44,12 +46,12 @@ public class MainActivity extends FragmentActivity {
     /**
      * 界面的导航栏
      */
-    @Bind(R.id.mainTabLayout)
+    @BindView(R.id.mainTabLayout)
     TabLayout mMainTabLayout;
     /**
      * 主界面的viewPager，显示各个fragment
      */
-    @Bind(R.id.mainLayout)
+    @BindView(R.id.mainLayout)
     ViewPager mMainLayout;
 
     /**
@@ -57,36 +59,36 @@ public class MainActivity extends FragmentActivity {
      */
     public MainFragmentPagerAdapter mMainFragmentPagerAdapter;
     public FragmentManager mFragmentManager;
-    @Bind(R.id.iv_menu)
+    @BindView(R.id.iv_menu)
     ImageView mIvMenu;
-    @Bind(R.id.iv_login)
+    @BindView(R.id.iv_login)
     TextView mIvLogin;
-    @Bind(R.id.drawer_layout)
+    @BindView(R.id.drawer_layout)
     DrawerLayout mDrawerLayout;
-    @Bind(R.id.tv_title)
+    @BindView(R.id.tv_title)
     TextView mTvTitle;
 
-    @Bind(R.id.user)
+    @BindView(R.id.user)
     RelativeLayout user;
     /**
      * 车辆管理
      */
-    @Bind(R.id.ll_carManage)
+    @BindView(R.id.ll_carManage)
     LinearLayout llCarManage;
     /**
      * 消息中心
      */
-    @Bind(R.id.ll_newsCenter)
+    @BindView(R.id.ll_newsCenter)
     LinearLayout llNewsCenter;
     /**
      * 违章记录
      */
-    @Bind(R.id.ll_breakLawsRecords)
+    @BindView(R.id.ll_breakLawsRecords)
     LinearLayout llBreakLawsRecords;
     /**
      * 设置中心
      */
-    @Bind(R.id.ll_settingCenter)
+    @BindView(R.id.ll_settingCenter)
     LinearLayout llSettingCenter;
     private Fragment[] mFragments;
 
@@ -184,7 +186,7 @@ public class MainActivity extends FragmentActivity {
             @Override
             public void onClick(View v) {
                 MyToast.show(getApplicationContext(), "即将开放");
-               // startActivity(new Intent(getApplicationContext(), CarManageActivitty.class));
+                // startActivity(new Intent(getApplicationContext(), CarManageActivitty.class));
                 mDrawerLayout.closeDrawers();
             }
         });
@@ -238,32 +240,29 @@ public class MainActivity extends FragmentActivity {
 
     private void logOut() {
         String url = ConstKey.LOGOUT + ParamsBuilder.getParams();
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        MyLog.i(response);
-                        final String retContent = ParseReturnUtil.parseRetrun(response, MainActivity.this);
-                        if (retContent==null){
-                            return;
-                        }else{
-                            if (!TextUtils.isEmpty(TApplication.app.mUserId)) {
-                                PreferenceUtils.clearPreference(TApplication.app, PreferenceManager
-                                        .getDefaultSharedPreferences(TApplication.app));
-                            }
-                            TApplication.app.exit();
-                            mDrawerLayout.closeDrawers();
-                        }
-                    }
-                }
-                , new Response.ErrorListener() {
+        Request<String> request = NoHttp.createStringRequest(url, RequestMethod.POST);
+        CallServer.getRequestInstance().add(this, 0, request, new HttpListener<String>() {
             @Override
-            public void onErrorResponse(VolleyError error) {
+            public void onSucceed(int what, Response<String> response) {
+                MyLog.i(response.get());
+                final String retContent = ParseReturnUtil.parseRetrun(response.get(), MainActivity.this);
+                if (retContent == null) {
+                    return;
+                } else {
+                    if (!TextUtils.isEmpty(TApplication.app.mUserId)) {
+                        PreferenceUtils.clearPreference(TApplication.app, PreferenceManager
+                                .getDefaultSharedPreferences(TApplication.app));
+                    }
+                    TApplication.app.exit();
+                    mDrawerLayout.closeDrawers();
+                }
             }
-        }
-        ) ;
-        // 把这个请求加入请求队列
-        TApplication.app.addToRequestQueue(stringRequest);
+
+            @Override
+            public void onFailed(int what, String url, Object tag, String error, int resCode, long ms) {
+
+            }
+        }, false, false);
     }
 
     long currentTime;

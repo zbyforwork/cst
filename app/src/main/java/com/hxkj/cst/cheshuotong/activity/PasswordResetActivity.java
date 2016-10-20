@@ -13,7 +13,7 @@ import android.widget.TextView;
 import com.hxkj.cst.cheshuotong.R;
 import com.hxkj.cst.cheshuotong.utils.ExceptionUtil;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
 /**
@@ -25,40 +25,40 @@ public class PasswordResetActivity extends Activity {
     /**
      * 返回
      */
-    @Bind(R.id.iv_Passwordback)
+    @BindView(R.id.iv_Passwordback)
     ImageView ivPasswordback;
 
 
     /**
      * 重新输入密码
      */
-    @Bind(R.id.et_newpassword)
+    @BindView(R.id.et_newpassword)
     EditText etNewpassword;
 
-    @Bind(R.id.rel_password)
+    @BindView(R.id.rel_password)
     RelativeLayout relPassword;
-    @Bind(R.id.relative)
+    @BindView(R.id.relative)
     RelativeLayout relative;
-    @Bind(R.id.tv_chongfu)
+    @BindView(R.id.tv_chongfu)
     TextView tvChongfu;
     /**
      * 再次输入密码
      */
-    @Bind(R.id.et_chongfu)
+    @BindView(R.id.et_chongfu)
     EditText etChongfu;
     /**
      * 提示密码输入正确与否
      */
-    @Bind(R.id.tv_info)
+    @BindView(R.id.tv_info)
     TextView tvInfo;
-    @Bind(R.id.rel_chongfu)
+    @BindView(R.id.rel_chongfu)
     RelativeLayout relChongfu;
-    @Bind(R.id.relativeLayout)
+    @BindView(R.id.relativeLayout)
     RelativeLayout relativeLayout;
     /**
      * 提交
      */
-    @Bind(R.id.bt_login)
+    @BindView(R.id.bt_login)
     Button btLogin;
 
     // 输入软键盘管理者
